@@ -6,5 +6,6 @@ namespace MaskGame.Character
         JOCK,
         NERD,
         BASIC,
+        BUSINESS,
     }
 }

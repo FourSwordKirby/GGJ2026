@@ -5,5 +5,6 @@ namespace MaskGame.Character
     public struct CharacterInputs
     {
         public Vector3 MovementIntention;
+        public bool TriggerToggle;
     }
 }

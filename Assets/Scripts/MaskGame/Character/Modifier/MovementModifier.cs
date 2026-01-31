@@ -5,14 +5,11 @@ namespace MaskGame.Character.Modifier
     [Serializable]
     public class MovementModifier
     {
-        public MaskGameCharacter Character;
-
-        public MovementModifier(MaskGameCharacter character)
+        public MovementModifier()
         {
-            Character = character;
         }
 
-        public virtual void ApplyInputToCharacter(CharacterInputs inputs, float deltaTime)
+        public virtual void ApplyInputToCharacter(MaskGameCharacter character, CharacterInputs inputs, float deltaTime)
         {
 
         }

@@ -11,7 +11,7 @@ namespace MaskGame
             PlayerCharacter c = other.GetComponentInParent<PlayerCharacter>();
             if (c != null)
             {
-                c.PromptMaskStateChange(NewMaskState);
+                c.RegisterZoneOverlap(this);
             }
         }
     }

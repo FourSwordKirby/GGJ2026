@@ -1,22 +1,28 @@
 using MaskGame.Character.Modifier;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace MaskGame.Character
 {
+    [RequireComponent(typeof(PlayerMaskManager))]
     public class PlayerCharacter : MaskGameCharacter
     {
-        public MovementModifier Movement;
+        public PlayerMaskManager MaskManager { get; private set; }
 
         protected CharacterInputs InputsForNextFixedUpdate;
-        private MaskState NextMaskState;
-        public MaskState CurrentMaskState = MaskState.BASIC;
+
+        protected ZoneTrigger OverlappedZone;
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            MaskManager = GetComponent<PlayerMaskManager>();
+        }
 
         protected override void Start()
         {
             base.Start();
-
-            Movement = new WalkingMovementModifier(this);
         }
 
         // Update is called once per frame
@@ -30,55 +36,42 @@ namespace MaskGame.Character
             // InputsForNextFixedUpdate.MovementIntention = Vector3.zero;
             Vector2 direction = InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
             InputsForNextFixedUpdate.MovementIntention.x = direction.x;
+            InputsForNextFixedUpdate.MovementIntention.y = 0;
             InputsForNextFixedUpdate.MovementIntention.z = direction.y;
+
+            InputsForNextFixedUpdate.TriggerToggle = InputsForNextFixedUpdate.TriggerToggle || InputSystem.actions.FindAction("Toggle").IsPressed();
         }
 
         public override void PrePhysics(float deltaTime)
         {
-            Movement.ApplyInputToCharacter(InputsForNextFixedUpdate, deltaTime);
+            HandleInputsForZoneOverlaps();
+            MaskManager.Step(deltaTime);
+            MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
 
             InputsForNextFixedUpdate = new CharacterInputs();
         }
 
+        protected void HandleInputsForZoneOverlaps()
+        {
+            if (OverlappedZone != null)
+            {
+                // Find/Get UI Manager and request button prompt UI
+
+                if (InputsForNextFixedUpdate.TriggerToggle)
+                {
+                    MaskManager.QueueNextMaskState(OverlappedZone.NewMaskState);
+                }
+            }
+            OverlappedZone = null;
+        }
+
         public override void PostPhysics(float deltaTime)
         {
-            UpdateMaskState();
         }
 
-        public void UpdateMaskState()
+        public void RegisterZoneOverlap(ZoneTrigger zone)
         {
-            if (NextMaskState == MaskState.NONE)
-            {
-                return;
-            }
-
-            CurrentMaskState = NextMaskState;
-            NextMaskState = MaskState.NONE;
-
-            switch (CurrentMaskState)
-            {
-                case MaskState.JOCK:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.red;
-                    }
-                    break;
-                case MaskState.BASIC:
-                default:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.white;
-                    }
-                    break;
-            }
-        }
-
-        public void PromptMaskStateChange(MaskState maskState)
-        {
-            if (InputSystem.actions.FindAction("Toggle").IsPressed())
-            {
-                NextMaskState = maskState;
-            }
+            OverlappedZone = zone;
         }
     }
 }
