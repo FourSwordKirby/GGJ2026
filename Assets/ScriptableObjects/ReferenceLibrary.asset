@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7006e07405271794c873326de82cc0eb, type: 3}
   m_Name: ReferenceLibrary
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceLibrary
-  npcPrefab: {fileID: 7202551887520415934, guid: eae50c1756b695e4daa8d9868d654133, type: 3}
+  npcPrefab: {fileID: 3039925223837720653, guid: eae50c1756b695e4daa8d9868d654133, type: 3}
