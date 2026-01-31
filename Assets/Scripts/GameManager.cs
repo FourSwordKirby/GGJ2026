@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
+        Keyboard.current.spaceKey.IsPressed();
         OnStartPeriod += StartPeriod;
         OnTimeLimitReached += FailLevel;
         OnClassroomReached += CheckObjectiveReached;
