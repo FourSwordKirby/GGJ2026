@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66f01825f34ea340b49c3ac1cbb603a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneTrigger
-  NewMaskState: 4
+  ZoneMaskState: 4
 --- !u!65 &363657985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94c333cc2b3bea642b1b411afd008594, type: 2}
+  - {fileID: 2100000, guid: 8336f8496dec7694e87a91ed6c97d9fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66f01825f34ea340b49c3ac1cbb603a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskGame.ZoneTrigger
-  NewMaskState: 3
+  ZoneMaskState: 3
 --- !u!1 &1592490046
 GameObject:
   m_ObjectHideFlags: 0

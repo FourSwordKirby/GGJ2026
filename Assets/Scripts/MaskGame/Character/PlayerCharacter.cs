@@ -1,5 +1,6 @@
 using MaskGame.Character.Modifier;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,8 @@ namespace MaskGame.Character
 
         protected CharacterInputs InputsForNextFixedUpdate;
 
-        protected ZoneTrigger OverlappedZone;
+        protected List<ZoneTrigger> OverlappedZones = new List<ZoneTrigger>();
+        protected ZoneTrigger CurrentZone;
 
         protected override void OnValidate()
         {
@@ -44,25 +46,39 @@ namespace MaskGame.Character
 
         public override void PrePhysics(float deltaTime)
         {
-            HandleInputsForZoneOverlaps();
+            HandleZones();
             MaskManager.Step(deltaTime);
             MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
 
             InputsForNextFixedUpdate = new CharacterInputs();
         }
 
+        protected void HandleZones()
+        {
+            if (OverlappedZones.Count == 0)
+            {
+                CurrentZone = null;
+            }
+            else
+            {
+                CurrentZone = OverlappedZones[0];
+            }
+
+            HandleInputsForZoneOverlaps();
+            OverlappedZones.Clear();
+        }
+
         protected void HandleInputsForZoneOverlaps()
         {
-            if (OverlappedZone != null)
+            if (CurrentZone != null)
             {
                 // Find/Get UI Manager and request button prompt UI
 
                 if (InputsForNextFixedUpdate.TriggerToggle)
                 {
-                    MaskManager.QueueNextMaskState(OverlappedZone.NewMaskState);
+                    MaskManager.QueueNextMaskState(CurrentZone.ZoneMaskState);
                 }
             }
-            OverlappedZone = null;
         }
 
         public override void PostPhysics(float deltaTime)
@@ -71,7 +87,17 @@ namespace MaskGame.Character
 
         public void RegisterZoneOverlap(ZoneTrigger zone)
         {
-            OverlappedZone = zone;
+            OverlappedZones.Add(zone);
+        }
+
+        public bool IsInMismatchedZone()
+        {
+            if (CurrentZone)
+            {
+                return MaskManager.CurrentMaskState != CurrentZone.ZoneMaskState;
+            }
+
+            return false;
         }
     }
 }

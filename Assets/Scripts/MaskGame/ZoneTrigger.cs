@@ -4,7 +4,7 @@ namespace MaskGame
 {
     public class ZoneTrigger : MonoBehaviour
     {
-        public MaskState NewMaskState;
+        public MaskState ZoneMaskState;
 
         public void OnTriggerStay(Collider other)
         {

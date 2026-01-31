@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     void UpdatePopularity()
     {
         // While the player's mask is mismatched, tick the timer up.
-        if (player.RequestedMaskState != MaskState.NONE && player.CurrentMaskState != player.RequestedMaskState)
+        if (player.IsInMismatchedZone())
             MismatchedMaskStateDuration += Time.deltaTime;
         else
             MismatchedMaskStateDuration = 0;
