@@ -99,9 +99,9 @@ public class NPCZone : MonoBehaviour
 
             Vector3 spawnPos = spawnMin + new Vector3(dPosSpawn.x, 0, dPosSpawn.y);
 
-            GameObject npcObj = Instantiate(referenceLibrary.npcPrefab, spawnPos, Quaternion.identity, spawnGroup);
+            GameObject npcObj = Instantiate(referenceLibrary.PrefabForClique(cliqueKind), spawnPos, Quaternion.identity, spawnGroup);
             NPCCharacter npcChar = npcObj.GetComponent<NPCCharacter>();
-            npcChar.Init(cliqueKind);
+            npcChar.Init(this);
         }
     }
 
@@ -109,6 +109,12 @@ public class NPCZone : MonoBehaviour
     {
         Vector3 vecScale = transform.localScale;
         this.rectBounds = new Rect(transform.position, new Vector2(vecScale.x, vecScale.z));
+    }
+
+    public bool isPosWithinBounds(Vector3 worldPos)
+    {
+        Vector2 vecXZ = new Vector2(worldPos.x, worldPos.z);
+        return rectBounds.Contains(vecXZ);
     }
 
     // Gizmos
