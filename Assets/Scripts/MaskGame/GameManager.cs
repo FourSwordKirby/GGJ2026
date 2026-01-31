@@ -2,13 +2,14 @@ using MaskGame.Character;
 using MaskGame.Cheerleader;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public LevelManager Level;
+    public LevelManager LevelManager;
 
     /// <summary>
     /// The amount of time the player has to reach the objective
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     public CheerleaderManager CheerleaderManager;
 
     public int Period;
-    public Classroom ClassroomObjective;
+    public Classroom GoalClassroom;
     public float TimeRemaining;
 
     public static Action<int> OnStartPeriod;
@@ -107,7 +108,7 @@ public class GameManager : MonoBehaviour
 
     void CheckObjectiveReached(Classroom classroom)
     {
-        if(classroom == ClassroomObjective)
+        if(classroom == GoalClassroom)
             AdvancePeriod();
     }
 
@@ -124,7 +125,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Starting Period {period}");
         TimeRemaining = MaximumTime;
-        ClassroomObjective = Level.classrooms[Random.Range(0, Level.classrooms.Count)];
+        Classroom previousGoalClassroom = GoalClassroom;
+        GoalClassroom = LevelManager.SelectGoalClassroom(previousGoalClassroom);
+        LevelManager.SetClassroomAsGoal(GoalClassroom);
     }
 }
 
@@ -134,5 +137,21 @@ public class GameManager : MonoBehaviour
 [Serializable]
 public class LevelManager
 {
-    public List<Classroom> classrooms;
+    public List<Classroom> Classrooms;
+
+    public void SetClassroomAsGoal(Classroom goalClassroom)
+    {
+        foreach(Classroom room in Classrooms)
+        {
+            room.SetAsNeutral();
+        }
+
+        goalClassroom.SetAsGoal();
+    }
+
+    internal Classroom SelectGoalClassroom(Classroom previousClassroom)
+    {
+        var SelectableClassrooms = Classrooms.Where(x => x != previousClassroom).ToList();
+        return SelectableClassrooms[Random.Range(0, SelectableClassrooms.Count)];
+    }
 }
