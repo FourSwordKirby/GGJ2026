@@ -6,12 +6,21 @@ namespace MaskGame
     {
         public MaskState NewMaskState;
 
-        public void OnTriggerStay(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
             PlayerCharacter c = other.GetComponentInParent<PlayerCharacter>();
             if (c != null)
             {
-                c.PromptMaskStateChange(NewMaskState);
+                c.RequestMaskStateChange(NewMaskState);
+            }
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            PlayerCharacter c = other.GetComponentInParent<PlayerCharacter>();
+            if (c != null)
+            {
+                c.RequestMaskStateChange(MaskState.NONE);
             }
         }
     }

@@ -9,6 +9,8 @@ namespace MaskGame.Character
         public MovementModifier Movement;
 
         protected CharacterInputs InputsForNextFixedUpdate;
+
+        public MaskState RequestedMaskState = MaskState.NONE;
         private MaskState NextMaskState;
         public MaskState CurrentMaskState = MaskState.BASIC;
 
@@ -31,6 +33,11 @@ namespace MaskGame.Character
             Vector2 direction = InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
             InputsForNextFixedUpdate.MovementIntention.x = direction.x;
             InputsForNextFixedUpdate.MovementIntention.z = direction.y;
+
+            if (InputSystem.actions.FindAction("Toggle").IsPressed())
+            {
+                NextMaskState = RequestedMaskState;
+            }
         }
 
         public override void PrePhysics(float deltaTime)
@@ -73,12 +80,9 @@ namespace MaskGame.Character
             }
         }
 
-        public void PromptMaskStateChange(MaskState maskState)
+        public void RequestMaskStateChange(MaskState maskState)
         {
-            if (InputSystem.actions.FindAction("Toggle").IsPressed())
-            {
-                NextMaskState = maskState;
-            }
+            RequestedMaskState = maskState;
         }
     }
 }
