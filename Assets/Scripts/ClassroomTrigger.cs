@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class ClassroomTrigger : MonoBehaviour
 {
-    public Classroom TriggerOwner;
+    public Classroom Owner;
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("TriggerEntered");
-        GameManager.OnClassroomReached.Invoke(TriggerOwner);
+        GameManager.OnClassroomReached.Invoke(Owner);
     }
 }

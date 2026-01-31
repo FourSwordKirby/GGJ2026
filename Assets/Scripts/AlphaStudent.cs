@@ -15,7 +15,7 @@ public enum StudentType
 /// This student is one which the player character needs to avoid running into. If the player runs into this student, they'll 
 /// lose "reputation"
 /// </summary>
-public class ObstacleStudent : MonoBehaviour
+public class AlphaStudent : MonoBehaviour
 {
     public StudentType StudentType;
 
