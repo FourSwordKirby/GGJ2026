@@ -1,4 +1,5 @@
 using MaskGame.Character;
+using MaskGame.Cheerleader;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     public float MismatchedMaskStateDuration = 0.0f;
 
     public PlayerCharacter player;
+    public CheerleaderManager CheerleaderManager;
 
     public int Period;
     public Classroom ClassroomObjective;
@@ -52,6 +54,11 @@ public class GameManager : MonoBehaviour
     public static Action<int> OnStartPeriod;
     public static Action OnTimeLimitReached;
     public static Action<Classroom> OnClassroomReached;
+
+    private void OnValidate()
+    {
+        CheerleaderManager = GetComponentInChildren<CheerleaderManager>();
+    }
 
     private void Start()
     {
