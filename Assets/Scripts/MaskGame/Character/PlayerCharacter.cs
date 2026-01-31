@@ -9,7 +9,7 @@ namespace MaskGame.Character
         public MovementModifier Movement;
 
         protected CharacterInputs InputsForNextFixedUpdate;
-        public MaskState NextMaskState;
+        private MaskState NextMaskState;
         public MaskState CurrentMaskState = MaskState.BASIC;
 
         protected override void Start()
@@ -70,6 +70,14 @@ namespace MaskGame.Character
                         m.materials[0].color = Color.white;
                     }
                     break;
+            }
+        }
+
+        public void PromptMaskStateChange(MaskState maskState)
+        {
+            if (InputSystem.actions.FindAction("Toggle").IsPressed())
+            {
+                NextMaskState = maskState;
             }
         }
     }
