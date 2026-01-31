@@ -19,8 +19,9 @@ public class NPCCharacter : MonoBehaviour
     [SerializeField] private CliqueKind cliqueKind;
     [SerializeField] private NPCZone npcZone;
 
-    private Rigidbody rb;
     private float spawnTime;
+
+    private Vector3 velocity;
 
     // Cheerleader
 
@@ -33,17 +34,15 @@ public class NPCCharacter : MonoBehaviour
 
     // Methods
 
-    public void SetClique(CliqueKind cliqueKind)
-    {
-        this.cliqueKind = cliqueKind;
-    }
-
     void Start()
     {
         // npcZone = GetComponentInParent<NPCZone>();
-        rb = GetComponent<Rigidbody>();
         spawnTime = Time.time;
+    }
 
+    public void Init(CliqueKind cliqueKind)
+    {
+        this.cliqueKind = cliqueKind;
         InitTransform();
     }
 
@@ -56,7 +55,7 @@ public class NPCCharacter : MonoBehaviour
                     // Randomly rotate pivot by rotating the NPC
 
                     transform.Rotate(Vector3.up, Random.value * 360.0f);
-                    rb.linearVelocity = transform.forward * npcSettings.jockRunVelocity;
+                    velocity = transform.forward * npcSettings.jockRunVelocity;
                 }
                 break;
 
@@ -79,7 +78,7 @@ public class NPCCharacter : MonoBehaviour
                     Vector3 normalFace = new Vector3(signX, 0, signZ);
                     transform.rotation = Quaternion.LookRotation(normalFace);
 
-                    rb.linearVelocity = -transform.forward * npcSettings.businessWalkSpeed;
+                    velocity = -transform.forward * npcSettings.businessWalkSpeed;
                 }
                 break;
 
@@ -95,7 +94,11 @@ public class NPCCharacter : MonoBehaviour
 
             case CliqueKind.THEATER:
                 {
-                    rb.linearVelocity = TheaterDirSign() * transform.right * npcSettings.theaterMoveSpeed;
+                    // Correct to the side to center movement
+
+                    transform.position += transform.right * npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime / 2;
+
+                    velocity = TheaterDirSign() * transform.right * npcSettings.theaterMoveSpeed;
                 }
                 break;
         }
@@ -103,45 +106,33 @@ public class NPCCharacter : MonoBehaviour
 
     void Update()
     {
-        Move(fFixedUpdate: false);
+        Move();
     }
 
-    void FixedUpdate()
-    {
-        Move(fFixedUpdate: true);
-    }
-
-    void Move(bool fFixedUpdate)
+    void Move()
     {
         switch (cliqueKind)
         {
             case CliqueKind.JOCK:
                 {
-                    if (!fFixedUpdate)
-                        return;
-
                     // Move in circle
 
-                    Vector3 velocityCur = rb.linearVelocity;
-                    Vector3 normalCur = Vector3.Normalize(velocityCur);
+                    Vector3 normalCur = Vector3.Normalize(Vector3.Cross(velocity, Vector3.up));
 
                     float accel = npcSettings.JockCentripetalAccel();
 
-                    Vector3 velocityNext = velocityCur + Time.fixedDeltaTime * normalCur * accel;
+                    Vector3 velocityNext = velocity + Time.fixedDeltaTime * normalCur * accel;
                     velocityNext.y = 0;
-                    rb.linearVelocity = velocityNext;
+                    velocity = velocityNext;
 
                     // Look towards velocity
 
-                    transform.rotation = Quaternion.LookRotation(velocityCur);
+                    transform.rotation = Quaternion.LookRotation(velocity);
                 }
                 break;
 
             case CliqueKind.CHEERLEADER:
                 {
-                    if (fFixedUpdate)
-                        return;
-
                     // Hop, hop, left, hop, hop, right
 
                     float dTFromTime = cheerHopTime - Time.time;
@@ -151,9 +142,6 @@ public class NPCCharacter : MonoBehaviour
 
             case CliqueKind.BUSINESS:
                 {
-                    if (fFixedUpdate)
-                        return;
-
                     // Move back til edge
 
                     if (npcZone)
@@ -165,22 +153,18 @@ public class NPCCharacter : MonoBehaviour
 
             case CliqueKind.NERD:
                 {
-                    if (fFixedUpdate)
-                        return;
-
                     // Periodically pause and rotate
                 }
                 break;
 
             case CliqueKind.THEATER:
                 {
-                    if (fFixedUpdate)
-                        return;
-
-                    rb.linearVelocity = TheaterDirSign() * transform.right * npcSettings.theaterMoveSpeed;
+                    velocity = TheaterDirSign() * transform.right * npcSettings.theaterMoveSpeed;
                 }
                 break;
         }
+
+        transform.position += velocity * Time.deltaTime;
     }
 
     // Theater

@@ -27,33 +27,33 @@ public class NPCZone : MonoBehaviour
         {
             case CliqueKind.JOCK:
                 {
-                    SpawnNPCGrid();
+                    SpawnNPCGrid(unitSize: 4, offsetLimit: 1);
                 }
                 break;
 
             case CliqueKind.CHEERLEADER:
                 {
-                    SpawnNPCGrid();
+                    SpawnNPCGrid(unitSize: 5);
 
                 }
                 break;
 
             case CliqueKind.BUSINESS:
                 {
-                    SpawnNPCGrid();
+                    SpawnNPCGrid(unitSize: 4, populationRatio: 0.6f);
                 }
                 break;
 
             case CliqueKind.NERD:
                 {
-                    SpawnNPCGrid();
+                    SpawnNPCGrid(unitSize: 4, populationRatio: 0.3f);
                 }
                 break;
 
             case CliqueKind.THEATER:
                 {
                     float marginHori = npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime * 1.05f;
-                    SpawnNPCGrid(marginHori: marginHori);
+                    SpawnNPCGrid(unitSize: 3, offsetLimit: 0.5f, marginHori: marginHori, marginVert: 3);
                 }
                 break;
         }
@@ -61,7 +61,7 @@ public class NPCZone : MonoBehaviour
 
     void SpawnNPCGrid(
         float unitSize = 1,
-        float offsetLimit = 1,
+        float offsetLimit = 0,
         float populationRatio = 1.0f,
         float marginHori = 1.0f,
         float marginVert = 1.0f)
@@ -92,14 +92,16 @@ public class NPCZone : MonoBehaviour
             Vector2 dPosSpawn = Vector2.right * unitSize * colIndex + Vector2.up * unitSize * rowIndex;
             dPosSpawn += Random.insideUnitCircle * offsetLimit;
 
-            float clampedX = Mathf.Clamp(dPosSpawn.x, -width / 2, width / 2);
-            float clampedY = Mathf.Clamp(dPosSpawn.y, -height / 2, height / 2);
+            float clampedX = Mathf.Clamp(dPosSpawn.x, 0, width);
+            float clampedY = Mathf.Clamp(dPosSpawn.y, 0, height);
 
-            dPosSpawn = new Vector2(clampedX, clampedY);
+            // dPosSpawn = new Vector2(clampedX, clampedY);
 
             Vector3 spawnPos = spawnMin + new Vector3(dPosSpawn.x, 0, dPosSpawn.y);
 
-            Instantiate(referenceLibrary.npcPrefab, spawnPos, Quaternion.identity, spawnGroup);
+            GameObject npcObj = Instantiate(referenceLibrary.npcPrefab, spawnPos, Quaternion.identity, spawnGroup);
+            NPCCharacter npcChar = npcObj.GetComponent<NPCCharacter>();
+            npcChar.Init(cliqueKind);
         }
     }
 

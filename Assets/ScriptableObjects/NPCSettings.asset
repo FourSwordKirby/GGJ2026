@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf171a39fdb76f04287fb6fe01a46a35, type: 3}
   m_Name: NPCSettings
   m_EditorClassIdentifier: Assembly-CSharp::NPCSettings
-  jockRunRadius: 0
-  jockRunVelocity: 0
+  jockRunRadius: 1
+  jockRunVelocity: 10
   cheerHopDist: 20
   cheerHopTime: 1
   businessWalkSpeed: 10
-  nerdWalkSpeed: 0
+  nerdWalkSpeed: 1.7
   nerdMarchTimeRange: {x: 1, y: 5}
   nerdRotationRange: {x: 30, y: 270}
   nerdRotationSpeed: 0
-  theaterMoveSpeed: 0
-  theaterSwitchTime: 0
+  theaterMoveSpeed: 7
+  theaterSwitchTime: 1
