@@ -12,13 +12,13 @@ namespace MaskGame
         private void OnValidate()
         {
             Camera = GetComponent<CinemachineCamera>();
-            Player = FindAnyObjectByType<PlayerCharacter>();
-            Camera.Target.TrackingTarget = Player.transform;
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            Player = FindAnyObjectByType<PlayerCharacter>();
+            Camera.Target.TrackingTarget = Player.transform;
         }
 
         // Update is called once per frame

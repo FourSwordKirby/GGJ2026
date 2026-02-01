@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCCheer
       objectReference: {fileID: 0}
+    - target: {fileID: 4082498932271973654, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
+      propertyPath: MaxImpulse
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082498932271973654, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
+      propertyPath: DepenetrationRate
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7381708147364300239, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,20 +60,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8936194725746583062, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
+      propertyPath: Impulse
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3067063109767891836, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3998311181874731787}
+      addedObject: {fileID: 6608811858273116789}
   m_SourcePrefab: {fileID: 100100000, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
 --- !u!1 &2215132172521815611 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3067063109767891836, guid: f582bb1bfcf9c9a48bb4c7ec97d1d82c, type: 3}
   m_PrefabInstance: {fileID: 3759906852181652807}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3998311181874731787
+--- !u!114 &6608811858273116789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
