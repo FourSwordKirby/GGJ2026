@@ -13,11 +13,12 @@ public class NPCSettings : ScriptableObject
 
     [Header("Business")]
     public float businessWalkSpeed;
+    public Vector2 businessMarchTimeRange;
 
     [Header("Nerd")]
     public float nerdWalkSpeed;
     public Vector2 nerdMarchTimeRange;
-    public Vector2 nerdRotationRange;
+    public float nerdRotationMax;
     public float nerdRotationSpeed;
 
     [Header("Theater")]
