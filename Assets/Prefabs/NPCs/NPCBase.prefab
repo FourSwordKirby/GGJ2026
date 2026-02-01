@@ -325,8 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffa54963ad04f914fb02f90d2d55814f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcBounceEffect
-  MaxImpulse: 3
-  DepenetrationRate: 0.05
+  MaxImpulse: 2
+  DepenetrationRate: 0.03
   CharacterRadius: 0.5
 --- !u!54 &8837744771951951239
 Rigidbody:
