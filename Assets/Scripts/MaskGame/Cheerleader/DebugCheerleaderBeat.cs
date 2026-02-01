@@ -34,9 +34,13 @@ namespace MaskGame.Cheerleader
             string beatType = input.IsMinorBeat ? "Minor" : "Major";
             string leftRight = input.IsLeft ? "Left" : "Right";
             Debug.Log($"Got Beat [{beatType}, {leftRight}], Step count: {input.StepCount}");
-            Vector3 newPos = Arrow.transform.position;
-            newPos.x = BeatLocations[input.StepCount].position.x;
-            Arrow.transform.position = newPos;
+
+            if (Arrow != null)
+            {
+                Vector3 newPos = Arrow.transform.position;
+                newPos.x = BeatLocations[input.StepCount].position.x;
+                Arrow.transform.position = newPos;
+            }
         }
     }
 }

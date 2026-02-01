@@ -19,6 +19,7 @@ namespace MaskGame.Character
             { MaskState.BASIC, new BasicMaskPower() },
             { MaskState.CHEER, new CheerleaderMaskPower() },
             { MaskState.BUSINESS, new BusinessMaskPower() },
+            { MaskState.NERD, new NerdMaskPower() },
         };
 
         private void OnValidate()
@@ -57,6 +58,12 @@ namespace MaskGame.Character
                     foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
                     {
                         m.materials[0].color = Color.yellow;
+                    }
+                    break;
+                case MaskState.NERD:
+                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
+                    {
+                        m.materials[0].color = Color.green;
                     }
                     break;
                 case MaskState.BASIC:
