@@ -16,11 +16,16 @@ public class NPCZone : MonoBehaviour
     private Rect rectBounds;
     private Transform spawnGroup;
 
-    void Start()
+    private void OnEnable()
     {
         spawnGroup = (new GameObject("NPCZoneSpawnGroup")).transform;
         RefreshRectBounds();
         SpawnCrowd();
+    }
+
+    private void OnDisable()
+    {
+        Destroy(spawnGroup.gameObject);
     }
 
     void Update()

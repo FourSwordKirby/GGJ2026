@@ -17,11 +17,11 @@ public class GameManager : MonoBehaviour
         PeriodStart,
         PeriodInProgress,
         PeriodEnd,
-        LevelComplete,
         GameOver
     }
 
     public GamePhase currentPhase;
+    float currentPhaseSetTime;
 
     public LevelManager LevelManager;
 
@@ -104,6 +104,10 @@ public class GameManager : MonoBehaviour
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
         AudioManager.instance.StartLevelMusic();
 
+#if UNITY_EDITOR
+        Period = 1;
+#endif
+
         OnStartPeriod(Period);
     }
 
@@ -113,81 +117,120 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    // dumb hack
-    float phaseTransitionTime = 0.0f;
-    float fadeTime = 2.0f;
+
     void Update()
     {
+        // Update GamePhase
+
         switch (currentPhase)
         {
             case GamePhase.PeriodStart:
-                while (phaseTransitionTime < fadeTime)
                 {
-                    phaseTransitionTime += Time.deltaTime;
-                    break;
+                    if (ScreenTransitionManager.instance.IsFading())
+                        break;
+
+                    SetGamePhase(GamePhase.PeriodInProgress);
                 }
-                currentPhase = GamePhase.PeriodInProgress;
                 break;
+
             case GamePhase.PeriodInProgress:
-                UpdateTimeRemaining();
-                UpdatePopularity();
-                break;
-            case GamePhase.PeriodEnd:
-                while (phaseTransitionTime < fadeTime)
                 {
-                    phaseTransitionTime += Time.deltaTime;
-                    break;
+                    UpdateTimeRemaining();
+                    UpdatePopularity();
                 }
-                AdvancePeriod();
-                currentPhase = GamePhase.PeriodStart;
-                phaseTransitionTime = 0.0f;
                 break;
-            case GamePhase.LevelComplete:
-                break;
-            case GamePhase.GameOver:
-                if (Keyboard.current.rKey.wasPressedThisFrame)
+
+            case GamePhase.PeriodEnd:
                 {
-                    currentPhase = GamePhase.GameStart;
+                    const float WAIT_TIME = 4.0f;
+
+                    if (Time.time - currentPhaseSetTime < WAIT_TIME)
+                        break;
+
+                    AdvancePeriod();
+                }
+                break;
+
+            case GamePhase.GameOver:
+                {
+                    const float WAIT_TIME = 4.0f;
+
+                    if (Time.time - currentPhaseSetTime < WAIT_TIME)
+                        break;
+
+                    // Restart current period
+
+                    StartPeriod(Period);
                 }
                 break;
         }
+
+#if UNITY_EDITOR
         if (Keyboard.current.rKey.IsPressed())
         {
             Reload();
+        }
+#endif
+    }
+
+    void SetGamePhase(GamePhase nextPhase)
+    {
+        if (currentPhase == nextPhase)
+            return;
+
+        // Enter new state
+
+        currentPhase = nextPhase;
+        currentPhaseSetTime = Time.time;
+
+        switch (currentPhase)
+        {
+            case GamePhase.PeriodStart:
+                {
+                    TimeRemaining = MaximumTime;
+                    Popularity = MaximumPopularity;
+                    ScreenTransitionManager.instance.FadeIn(2.0f);
+                }
+                break;
+
+            case GamePhase.PeriodEnd:
+                {
+                    ScreenTransitionManager.instance.FadeOut(2.0f);
+                }
+                break;
+
+            case GamePhase.GameOver:
+                {
+                    ScreenTransitionManager.instance.FadeOut(2.0f);
+                }
+                break;
         }
     }
 
     public void PassPeriod(Classroom classroom)
     {
-        if(classroom == GoalClassroom)
+        if (classroom == GoalClassroom)
         {
-            AudioManager.instance.PlayPeriodPassed ();
-            ScreenTransitionManager.instance.FadeOut(2.0f);
+            AudioManager.instance.PlayPeriodPassed();
             PromptUI.ShowPrompt("Period Cleared!");
-            currentPhase = GamePhase.PeriodEnd;
+            SetGamePhase(GamePhase.PeriodEnd);
         }
-    }
-
-    public void RegisterLevelComplete()
-    {
-        currentPhase = GamePhase.LevelComplete;
     }
 
     public void OutOfTime()
     {
-        ScreenTransitionManager.instance.FadeOut(fadeTime);
         AudioManager.instance.PlayOutOfTime();
 
         PromptUI.ShowPrompt($"Out of Time");
-        currentPhase = GamePhase.GameOver;
+        SetGamePhase(GamePhase.GameOver);
     }
+
     public void OutOfPopularity()
     {
-        ScreenTransitionManager.instance.FadeOut(fadeTime);
-
         PromptUI.ShowPrompt($"Out of Popularity");
-        currentPhase = GamePhase.GameOver;
+        SetGamePhase(GamePhase.GameOver);
     }
+
     private string FormatPeriod(int value)
     {
         var digit = value % 10;
@@ -200,7 +243,7 @@ public class GameManager : MonoBehaviour
     void UpdateTimeRemaining()
     {
         TimeRemaining -= Time.deltaTime;
-        if(TimeRemaining + Time.deltaTime >= 10.0f && 10.0f > TimeRemaining)
+        if (TimeRemaining + Time.deltaTime >= 10.0f && 10.0f > TimeRemaining)
         {
             AudioManager.instance.PlayLast10Seconds();
         }
@@ -252,13 +295,30 @@ public class GameManager : MonoBehaviour
 
     void StartPeriod(int period)
     {
-        ScreenTransitionManager.instance.FadeIn(2.0f);
         string periodName = FormatPeriod(period + 1);
         PromptUI.ShowPrompt($"Get to {periodName} Period!");
-        currentPhase = GamePhase.PeriodStart;
+        SetGamePhase(GamePhase.PeriodStart);
 
-        TimeRemaining = MaximumTime;
         LevelManager.StartPeriod(period);
+
+        // Reset player state
+
+        player.MaskManager.QueueNextMaskState(MaskState.BASIC);
+
+        if (period == 0 || LevelManager.Periods[period - 1].GoalClassroom == null)
+        {
+            // No previous classroom, reset to game start
+
+            player.transform.SetPositionAndRotation(LevelManager.GameStartTransform.position, LevelManager.GameStartTransform.rotation);
+        }
+        else
+        {
+            Classroom classroomPrev = LevelManager.Periods[period - 1].GoalClassroom;
+
+            Transform transformPrev = classroomPrev.GetSnapTransform();
+
+            player.transform.SetPositionAndRotation(transformPrev.position, transformPrev.rotation);
+        }
     }
 }
 
@@ -268,17 +328,20 @@ public class GameManager : MonoBehaviour
 [Serializable]
 public class LevelManager
 {
+    public Transform GameStartTransform;
     public List<Period> Periods;
 
     public void StartPeriod(int period)
     {
-        if(period > Periods.Count)
+        if (period > Periods.Count)
         {
             Debug.Log("YOU COMPLETED THEM ALL, Reloading the scene and restarting the game");
             GameManager.instance.Reload();
         }
 
-        foreach(Period p in Periods)
+        // Reset period states
+
+        foreach (Period p in Periods)
         {
             foreach (var obj in p.RelevantObjects)
             {
@@ -287,6 +350,8 @@ public class LevelManager
             p.GoalClassroom.SetAsNeutral();
 
         }
+
+        // Activate next period
 
         foreach (var obj in Periods[period].RelevantObjects)
         {

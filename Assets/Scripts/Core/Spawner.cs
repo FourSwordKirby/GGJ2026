@@ -10,10 +10,22 @@ public class Spawner : MonoBehaviour
 
     private BoxCollider spawnArea;
 
-    void Start()
+    private Transform spawnGroup;
+
+    void Awake()
     {
         spawnArea = GetComponent<BoxCollider>();
+    }
+
+    private void OnEnable()
+    {
+        spawnGroup = (new GameObject("SpawnerGroup")).transform;
         StartCoroutine(SpawnRoutine());
+    }
+
+    private void OnDisable()
+    {
+        Destroy(spawnGroup.gameObject);
     }
 
     public IEnumerator SpawnRoutine()
@@ -28,7 +40,7 @@ public class Spawner : MonoBehaviour
                 Random.Range(spawnArea.bounds.min.z, spawnArea.bounds.max.z)
             );
 
-            GameObject studentObj = Instantiate(studentPrefab, randomPoint, Quaternion.identity);
+            GameObject studentObj = Instantiate(studentPrefab, randomPoint, Quaternion.identity, spawnGroup);
             if (studentObj.TryGetComponent<StraightGuy>(out var student))
             {
                 student.moveDirection = travelDirection;

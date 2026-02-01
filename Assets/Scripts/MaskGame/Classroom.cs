@@ -9,6 +9,8 @@ public class Classroom : MonoBehaviour
     private Material NeutralMaterial;
     [SerializeField]
     private Material GoalMaterial;
+    [SerializeField]
+    private Transform snapTransform;
 
     public Renderer SelfRenderer;
 
@@ -27,5 +29,10 @@ public class Classroom : MonoBehaviour
     public void SetAsNeutral()
     {
         SelfRenderer.material = NeutralMaterial;
+    }
+
+    public Transform GetSnapTransform()
+    {
+        return snapTransform;
     }
 }

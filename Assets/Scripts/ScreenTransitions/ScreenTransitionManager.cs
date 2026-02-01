@@ -31,6 +31,16 @@ public class ScreenTransitionManager : MonoBehaviour
         }
     }
 
+    public bool IsFadeActive()
+    {
+        return screenFader.fadeActive;
+    }
+
+    public bool IsFading()
+    {
+        return screenFader.fading;
+    }
+
     public IEnumerator FadeOutCoroutine()
     {
         yield return screenFader.FadeOut();

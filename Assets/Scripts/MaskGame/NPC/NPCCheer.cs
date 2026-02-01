@@ -41,6 +41,11 @@ public class NPCCheer : NPCCharacter
         }
     }
 
+    void OnDestroy()
+    {
+        CheerManager?.RemoveBeatCallback(this);
+    }
+
     protected override void InitTransform()
     {
         // Start in right hop position
