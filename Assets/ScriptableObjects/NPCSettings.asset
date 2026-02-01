@@ -21,7 +21,7 @@ MonoBehaviour:
   businessWalkSpeed: 2.5
   businessMarchTimeRange: {x: 0.2, y: 1}
   nerdColor: {r: 0, g: 1, b: 0.025017977, a: 1}
-  nerdWalkSpeed: 9
+  nerdWalkSpeed: 7
   nerdMarchTimeRange: {x: 0.5, y: 1.2}
   nerdRotationMax: 75
   nerdRotationSpeed: 200
