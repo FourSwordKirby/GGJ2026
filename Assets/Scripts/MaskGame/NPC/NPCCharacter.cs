@@ -7,9 +7,8 @@ public abstract class NPCCharacter : MonoBehaviour
     [Header("References")]
     [SerializeField] protected NPCSettings npcSettings;
 
-    [Header("Debug Only")]
-    [SerializeField] protected MaskState maskClique;
-    [SerializeField] protected NPCZone owningZone;
+    protected MaskState maskClique;
+    protected NPCZone owningZone;
 
     protected float spawnTime;
     protected Vector3 velocity;
