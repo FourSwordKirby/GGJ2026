@@ -8,5 +8,6 @@ namespace MaskGame.Character
         BASIC,
         BUSINESS,
         CHEER,
+        THEATER
     }
 }
