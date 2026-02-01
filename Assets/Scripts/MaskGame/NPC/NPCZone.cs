@@ -168,7 +168,7 @@ public class NPCZone : MonoBehaviour
     {
         Camera cam = Camera.main;
 
-        Bounds bounds = new Bounds(transform.position, new Vector3(rectBounds.x, 2.0f, rectBounds.y));
+        Bounds bounds = new Bounds(transform.position, new Vector3(rectBounds.width, 2.0f, rectBounds.height));
 
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
         bool visible = GeometryUtility.TestPlanesAABB(planes, bounds);
