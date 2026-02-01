@@ -18,12 +18,17 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// The amount of time the player has to reach the objective
     /// </summary>
-    public const float MaximumTime = 90.0f;
+    public const float MaximumTime = 100.0f;
 
     /// <summary>
     /// This float represents the player's current popularity. If it dips below 0, it's game over;
     /// </summary>
     public float Popularity = 100.0f;
+
+    /// <summary>
+    /// This float represents the player's current popularity. If it dips below 0, it's game over;
+    /// </summary>
+    public const float MaximumPopularity = 100.0f;
 
     /// <summary>
     /// This curve represents the rate that Popularity will decay over time when the player has the wrong mask for a given zone
@@ -56,6 +61,9 @@ public class GameManager : MonoBehaviour
     public static Action OnTimeLimitReached;
     public static Action<Classroom> OnClassroomReached;
 
+    // singleton design pattern
+    public static GameManager instance;
+
     private void OnValidate()
     {
         CheerleaderManager = GetComponentInChildren<CheerleaderManager>();
@@ -63,6 +71,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+
         InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
         Keyboard.current.spaceKey.IsPressed();
         OnStartPeriod += StartPeriod;

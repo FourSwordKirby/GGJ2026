@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class HallwayGuy : MonoBehaviour
 {
@@ -43,6 +44,11 @@ public class HallwayGuy : MonoBehaviour
         }
 
         transform.position = endPoint;
+        var direction = (endPoint - startPoint).normalized;
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction.normalized);
+        }
     }
 }
 
