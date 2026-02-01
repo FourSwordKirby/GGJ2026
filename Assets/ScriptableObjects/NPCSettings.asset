@@ -15,7 +15,7 @@ MonoBehaviour:
   jockRunRadius: 0.5
   jockRunVelocity: 5
   cheerHopDist: 2.5
-  businessWalkSpeed: 5
+  businessWalkSpeed: 2.5
   businessMarchTimeRange: {x: 0.2, y: 1}
   nerdWalkSpeed: 9
   nerdMarchTimeRange: {x: 0.5, y: 1.2}

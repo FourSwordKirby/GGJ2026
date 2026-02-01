@@ -94,6 +94,8 @@ public class NPCNerd : NPCCharacter
                     {
                         float step = Mathf.Sign(dDeg) * maxStep;
                         transform.Rotate(0, step, 0);
+
+                        animator.SetBool("left", Mathf.Sign(dDeg) < 0);
                     }
                 }
                 break;
@@ -131,6 +133,8 @@ public class NPCNerd : NPCCharacter
                     moveDuration = Random.Range(range.x, range.y);
 
                     velocity = transform.forward * npcSettings.nerdWalkSpeed;
+
+                    animator.SetBool("moving", true);
                 }
                 break;
 
@@ -150,6 +154,8 @@ public class NPCNerd : NPCCharacter
                     }
 
                     degTarget = Mathf.Repeat(transform.eulerAngles.y + dDeg + 180.0f, 360.0f) - 180.0f;
+
+                    animator.SetBool("moving", false);
                 }
                 break;
         }
