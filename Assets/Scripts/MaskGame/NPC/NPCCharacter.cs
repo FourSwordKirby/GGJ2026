@@ -1,6 +1,5 @@
-using UnityEngine;
 using MaskGame.Character;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 public abstract class NPCCharacter : MonoBehaviour
 {

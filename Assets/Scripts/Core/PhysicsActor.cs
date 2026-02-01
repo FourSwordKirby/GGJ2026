@@ -18,5 +18,11 @@ namespace Core
             base.OnValidate();
             ExtendedRigidbody = GetComponent<ExtendedRigidbody>();
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            ExtendedRigidbody = GetComponent<ExtendedRigidbody>();
+        }
     }
 }

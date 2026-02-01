@@ -1,8 +1,7 @@
-using UnityEditor.Experimental.GraphView;
+using MaskGame.Character;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using System.Collections.Generic;
-using MaskGame.Character;
 
 public class NPCBusiness : NPCCharacter
 {

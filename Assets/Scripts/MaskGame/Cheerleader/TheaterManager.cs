@@ -1,9 +1,6 @@
 using Core;
-using MaskGame.Character;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 namespace MaskGame.Theater
