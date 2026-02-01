@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
             GameObject studentObj = Instantiate(studentPrefab, randomPoint, Quaternion.identity);
             if (studentObj.TryGetComponent<StraightGuy>(out var student))
             {
-                student.Initialize(travelDirection);
+                student.Start();
             }
         }
     }
