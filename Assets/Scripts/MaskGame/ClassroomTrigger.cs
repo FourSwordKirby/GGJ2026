@@ -7,6 +7,6 @@ public class ClassroomTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("TriggerEntered");
-        GameManager.OnClassroomReached.Invoke(Owner);
+        GameManager.instance.OnClassroomReached.Invoke(Owner);
     }
 }

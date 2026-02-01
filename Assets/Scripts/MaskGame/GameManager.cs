@@ -1,3 +1,4 @@
+using MaskGame;
 using MaskGame.Character;
 using MaskGame.Cheerleader;
 using System;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -14,11 +16,11 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// The amount of time the player has to reach the objective
     /// </summary>
-    public const int MaxPeriod = 7;
+    public const int MaxPeriod = 1;
     /// <summary>
     /// The amount of time the player has to reach the objective
     /// </summary>
-    public const float MaximumTime = 100.0f;
+    public float MaximumTime = 100.0f;
 
     /// <summary>
     /// This float represents the player's current popularity. If it dips below 0, it's game over;
@@ -43,12 +45,14 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// As the player has a mismatched mask in a zone, popularity will decay over time. The decay rate advances from 0 to Maximum decay rate over the course of several seconds, defined by this variable
     /// </summary>
-    public const float MismatchedTimeUpperBound = 3.0f;
+    public float MismatchedTimeUpperBound = 5.0f;
 
     /// <summary>
     /// The amount of time the player has been in a mismatched mask state
     /// </summary>
     public float MismatchedMaskStateDuration = 0.0f;
+
+    public float PopularityRecoveryPerSecond = 10;
 
     public PlayerCharacter player;
     public CheerleaderManager CheerleaderManager;
@@ -57,9 +61,9 @@ public class GameManager : MonoBehaviour
     public Classroom GoalClassroom;
     public float TimeRemaining;
 
-    public static Action<int> OnStartPeriod;
-    public static Action OnTimeLimitReached;
-    public static Action<Classroom> OnClassroomReached;
+    public Action<int> OnStartPeriod;
+    public Action OnTimeLimitReached;
+    public Action<Classroom> OnClassroomReached;
 
     // singleton design pattern
     public static GameManager instance;
@@ -74,7 +78,10 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else
+        {
             Destroy(this.gameObject);
+            return;
+        }
 
         InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
         Keyboard.current.spaceKey.IsPressed();
@@ -87,11 +94,21 @@ public class GameManager : MonoBehaviour
         OnStartPeriod(Period);
     }
 
+    private void OnDestroy()
+    {
+        instance = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
         UpdateTimeRemaining();
         UpdatePopularity();
+
+        if (Keyboard.current.rKey.IsPressed())
+        {
+            Reload();
+        }
     }
 
     void UpdateTimeRemaining()
@@ -105,18 +122,40 @@ public class GameManager : MonoBehaviour
     {
         // While the player's mask is mismatched, tick the timer up.
         if (player.IsInMismatchedZone())
+        {
             MismatchedMaskStateDuration += Time.deltaTime;
+            TempUIManager.ShowMismatchAlert();
+        }
         else
+        {
             MismatchedMaskStateDuration = 0;
+            Popularity += PopularityRecoveryPerSecond * Time.deltaTime;
+        }
 
         float decayCurvePoint = MismatchedMaskStateDuration / MismatchedTimeUpperBound;
         float currentDecayRate = PopularityDecayCurve.Evaluate(decayCurvePoint) * MaximumPopularityDecayRate;
         Popularity -= currentDecayRate * Time.deltaTime;
+        Popularity = Math.Clamp(Popularity, 0, MaximumPopularity);
+        if (Popularity <= 0)
+        {
+            FailLevelByPopularity();
+        }
+    }
+
+    void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void FailLevel()
     {
         Debug.Log("Level Failed");
+        TempUIManager.DisplayLossTime(Reload);
+    }
+
+    void FailLevelByPopularity()
+    {
+        TempUIManager.DisplayLossPopularity(Reload);
     }
 
     void CheckObjectiveReached(Classroom classroom)
@@ -129,7 +168,10 @@ public class GameManager : MonoBehaviour
     {
         Period += 1;
         if (Period >= MaxPeriod)
+        {
             Debug.Log("Max Period Reached");
+            TempUIManager.DisplayWin(Reload);
+        }
         else
             StartPeriod(Period);
     }
@@ -141,6 +183,8 @@ public class GameManager : MonoBehaviour
         Classroom previousGoalClassroom = GoalClassroom;
         GoalClassroom = LevelManager.SelectGoalClassroom(previousGoalClassroom);
         LevelManager.SetClassroomAsGoal(GoalClassroom);
+
+        TempUIManager.DisplayStartTitle(null);
     }
 }
 
