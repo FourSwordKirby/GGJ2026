@@ -49,8 +49,8 @@ namespace MaskGame
             if (ShowAlert != Alert.activeSelf)
             {
                 Alert.SetActive(ShowAlert);
-                ShowAlert = false;
             }
+            ShowAlert = false;
         }
 
         public static void DisplayWin(Action callback)

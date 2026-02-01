@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b35e88ee87fa9746a7d8c606cdfb723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  Level:
-    classrooms:
+  LevelManager:
+    Classrooms:
     - {fileID: 0}
-    - {fileID: 0}
+  MaximumTime: 100
   Popularity: 100
   PopularityDecayCurve:
     serializedVersion: 2
@@ -74,12 +74,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MaximumPopularityDecayRate: 10
+  MaximumPopularityDecayRate: 50
+  MismatchedTimeUpperBound: 5
   MismatchedMaskStateDuration: 0
+  PopularityRecoveryPerSecond: 5
   player: {fileID: 0}
-  CheerleaderManager: {fileID: 0}
+  CheerleaderManager: {fileID: 8014636329379880541}
   Period: 0
-  ClassroomObjective: {fileID: 0}
+  GoalClassroom: {fileID: 0}
   TimeRemaining: 0
 --- !u!114 &8014636329379880541
 MonoBehaviour:

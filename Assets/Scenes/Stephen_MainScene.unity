@@ -5973,6 +5973,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: PopularityRecoveryPerSecond
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: 'Level.classrooms.Array.data[0]'
       value: 
       objectReference: {fileID: 1937323322}
