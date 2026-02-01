@@ -17,9 +17,10 @@ MonoBehaviour:
   cheerHopDist: 20
   cheerHopTime: 1
   businessWalkSpeed: 10
-  nerdWalkSpeed: 1.7
+  businessMarchTimeRange: {x: 3, y: 7}
+  nerdWalkSpeed: 25
   nerdMarchTimeRange: {x: 1, y: 5}
-  nerdRotationRange: {x: 30, y: 270}
-  nerdRotationSpeed: 0
+  nerdRotationMax: 150
+  nerdRotationSpeed: 400
   theaterMoveSpeed: 7
   theaterSwitchTime: 1

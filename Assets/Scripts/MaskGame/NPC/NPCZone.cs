@@ -95,7 +95,7 @@ public class NPCZone : MonoBehaviour
             float clampedX = Mathf.Clamp(dPosSpawn.x, 0, width);
             float clampedY = Mathf.Clamp(dPosSpawn.y, 0, height);
 
-            // dPosSpawn = new Vector2(clampedX, clampedY);
+            dPosSpawn = new Vector2(clampedX, clampedY);
 
             Vector3 spawnPos = spawnMin + new Vector3(dPosSpawn.x, 0, dPosSpawn.y);
 
@@ -108,7 +108,9 @@ public class NPCZone : MonoBehaviour
     void RefreshRectBounds()
     {
         Vector3 vecScale = transform.localScale;
-        this.rectBounds = new Rect(transform.position, new Vector2(vecScale.x, vecScale.z));
+        float xMin = transform.position.x - (vecScale.x / 2);
+        float zMin = transform.position.z - (vecScale.z / 2);
+        this.rectBounds = new Rect(xMin, zMin, vecScale.x, vecScale.z);
     }
 
     public bool isPosWithinBounds(Vector3 worldPos)

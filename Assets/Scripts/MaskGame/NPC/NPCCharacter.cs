@@ -25,15 +25,11 @@ public abstract class NPCCharacter : MonoBehaviour
 
     // Methods
 
-    void Start()
-    {
-        owningZone = GetComponentInParent<NPCZone>();
-        spawnTime = Time.time;
-    }
-
     public void Init(NPCZone owningZone)
     {
         this.owningZone = owningZone;
+        spawnTime = Time.time;
+
         InitChar();
         InitTransform();
     }
