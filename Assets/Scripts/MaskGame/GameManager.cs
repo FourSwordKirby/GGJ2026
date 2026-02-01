@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
             instance = this;
@@ -116,7 +116,10 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
+    }
 
+    private void Start()
+    {
         InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
         Keyboard.current.spaceKey.IsPressed();
         OnStartPeriod += StartPeriod;
