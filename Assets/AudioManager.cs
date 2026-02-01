@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip NerdZoneClip;
     public AudioClip BusinessZoneClip;
     public AudioClip CheerZoneClip;
+    public AudioClip TheaterZoneClip;
 
     public AudioClip OutOfTime;
     public AudioClip Last10Seconds;
@@ -30,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public void StartLevelMusic()
     {
         rootAudioSource.generator = loopingLevelBGM;
+        rootAudioSource.Play();
     }
 
     public void PlayMaskSwitch()
@@ -58,6 +60,7 @@ public class AudioManager : MonoBehaviour
                 rootAudioSource.PlayOneShot(CheerZoneClip);
                 break;
             case MaskState.THEATER:
+                rootAudioSource.PlayOneShot(TheaterZoneClip);
                 break;
         }
     }
