@@ -14,12 +14,16 @@ public class PromptUI : MonoBehaviour
 
     public static PromptUI instance;
 
-    public void Start()
+    private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(this.gameObject);
+    }
+
+    public void Start()
+    {
     }
 
     public void Update()

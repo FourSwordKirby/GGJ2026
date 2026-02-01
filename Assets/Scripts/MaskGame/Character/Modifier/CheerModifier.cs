@@ -4,11 +4,11 @@ namespace MaskGame.Character.Modifier
 {
     public class CheerModifier : MovementModifier
     {
-        public float MinorHopVerticalImpulse = 3;
-        public float MinorHopHorizontalImpulse = 4;
+        public float MinorHopVerticalImpulse = 6;
+        public float MinorHopHorizontalImpulse = 10;
 
-        public float MajorHopVerticalImpulse = 3;
-        public float MajorHopHorizontalImpulse = 4; 
+        public float MajorHopVerticalImpulse = 8;
+        public float MajorHopHorizontalImpulse = 5; 
 
         public bool DoMajorJump = false;
         public bool MajorJumpIsLeft = false;

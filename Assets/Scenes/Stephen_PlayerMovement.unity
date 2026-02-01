@@ -1298,7 +1298,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerVCam
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8731777140619762421, guid: 4e32b59241a8a6946b5f754a6a2710b8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
