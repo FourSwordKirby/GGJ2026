@@ -1,12 +1,14 @@
 using MaskGame.Character;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+/// <summary>
+/// 
+/// </summary>
+public class PromptUI : MonoBehaviour
 {
     public GameObject indicator;
 
-    // singleton design pattern
-    public static UIManager instance;
+    public static PromptUI instance;
 
     public void Start()
     {
