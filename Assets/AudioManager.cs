@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip CheerZoneClip;
     public AudioClip TheaterZoneClip;
 
+    public AudioClip PeriodPassed;
     public AudioClip OutOfTime;
     public AudioClip Last10Seconds;
 
@@ -73,5 +74,9 @@ public class AudioManager : MonoBehaviour
     public void PlayOutOfTime()
     {
         rootAudioSource.PlayOneShot(OutOfTime);
+    }
+    public void PlayPeriodPassed()
+    {
+        rootAudioSource.PlayOneShot(PeriodPassed);
     }
 }

@@ -52,6 +52,8 @@ MonoBehaviour:
   NerdZoneClip: {fileID: 8300000, guid: 5fd7e1912423f6e47a27bca30814eabf, type: 3}
   BusinessZoneClip: {fileID: 8300000, guid: 45f07c9956e8aa24a919a1a1debed671, type: 3}
   CheerZoneClip: {fileID: 8300000, guid: 6ff1442937bd5e445b2e2b899d9e3392, type: 3}
+  TheaterZoneClip: {fileID: 8300000, guid: 3d05f7df0479c3b4d8c083815c00cf38, type: 3}
+  PeriodPassed: {fileID: 8300000, guid: 3c07961045fc8104ea5d21443bd4ad51, type: 3}
   OutOfTime: {fileID: 8300000, guid: 11c50b4d2de577145a14253fa4dc84bc, type: 3}
   Last10Seconds: {fileID: 8300000, guid: f16f2af553993114b9635437f71ab12e, type: 3}
   rootAudioSource: {fileID: 7557477587886045122}

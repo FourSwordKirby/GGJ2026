@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         if(classroom == GoalClassroom)
         {
+            AudioManager.instance.PlayPeriodPassed ();
             ScreenTransitionManager.instance.FadeOut(2.0f);
             PromptUI.ShowPrompt("Period Cleared!");
             currentPhase = GamePhase.PeriodEnd;
