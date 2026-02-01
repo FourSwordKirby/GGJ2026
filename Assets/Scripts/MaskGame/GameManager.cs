@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public CheerleaderManager CheerleaderManager;
 
     public int Period;
-    public Classroom GoalClassroom => LevelManager.Periods[Period].GoalClassroom;
+    public Classroom GoalClassroom => LevelManager.GetGoalClassroom(Period);
     public float TimeRemaining;
 
     public Action<int> OnStartPeriod;
@@ -406,6 +406,12 @@ public class LevelManager
             obj.SetActive(true);
         }
         Periods[period].GoalClassroom.SetAsGoal();
+    }
+
+    public Classroom GetGoalClassroom(int period)
+    {
+        period = Math.Min(period, Periods.Count-1);
+        return Periods[period].GoalClassroom;
     }
 
     //internal Classroom SelectGoalClassroom(Classroom previousClassroom)
