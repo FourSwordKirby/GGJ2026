@@ -251,6 +251,17 @@ namespace Core
             Log(debugString);
         }
 
+        public virtual void SetAngularVelocity(Vector3 w)
+        {
+            string debugString = $"SetAngularVelocity({w})";
+            if (!Body.isKinematic)
+            {
+                Body.angularVelocity = w;
+                debugString += " => active angular velocity";
+            }
+            Log(debugString);
+        }
+
         /// <summary>
         /// Applies a physics impulse. Unlike the Combat ApplyVelocityX/Y, this does not cancel the existing X or Y motion.
         /// </summary>
