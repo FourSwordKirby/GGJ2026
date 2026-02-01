@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2619153451170226170}
   m_Layer: 0
   m_Name: UICamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081807235546821550, guid: 18699d249afc90e45bba0b7b3d38f9d2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9692567
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7081807235546821550, guid: 18699d249afc90e45bba0b7b3d38f9d2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.24605168
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7081807235546821550, guid: 18699d249afc90e45bba0b7b3d38f9d2, type: 3}
       propertyPath: m_LocalRotation.y
@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7081807235546821550, guid: 18699d249afc90e45bba0b7b3d38f9d2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7081807235546821550, guid: 18699d249afc90e45bba0b7b3d38f9d2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
