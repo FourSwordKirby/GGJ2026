@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5119848523016420207}
   - component: {fileID: 3200899668130557561}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: PromptUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
