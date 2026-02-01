@@ -2846,7 +2846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6592519130291637752, guid: f7beae68ea26de74b8a125a5bb39c751, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.06
+      value: -41.67
       objectReference: {fileID: 0}
     - target: {fileID: 6592519130291637752, guid: f7beae68ea26de74b8a125a5bb39c751, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5965,45 +5965,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: MaximumPopularityDecayRate
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: Level.classrooms.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: PopularityRecoveryPerSecond
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: 'Level.classrooms.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1937323322}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: 'Level.classrooms.Array.data[1]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: 'Level.classrooms.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: LevelManager.Classrooms.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: 'LevelManager.Classrooms.Array.data[0]'
       value: 
       objectReference: {fileID: 699503895}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: 'LevelManager.Classrooms.Array.data[1]'
-      value: 
-      objectReference: {fileID: 699503895}
-    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
-      propertyPath: 'LevelManager.Classrooms.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4687861161432411321, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.45032
@@ -6761,17 +6725,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 374083267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1937323322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8513141163498377675, guid: f7beae68ea26de74b8a125a5bb39c751, type: 3}
-  m_PrefabInstance: {fileID: 49912590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf02a42bd3f97b4e9e488588f5b64d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Classroom
 --- !u!1 &2013845333
 GameObject:
   m_ObjectHideFlags: 0
