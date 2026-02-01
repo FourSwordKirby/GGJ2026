@@ -27,6 +27,8 @@ namespace MaskGame.Character
         protected override void Start()
         {
             base.Start();
+            MaskManager = GetComponent<PlayerMaskManager>();
+            Animator = GetComponentInChildren<Animator>();
         }
 
         // Update is called once per frame
