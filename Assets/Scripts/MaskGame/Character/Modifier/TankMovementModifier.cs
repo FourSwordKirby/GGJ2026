@@ -13,12 +13,21 @@ namespace MaskGame.Character.Modifier
             character.ExtendedRigidbody.SetAngularVelocity(Vector3.zero);
             Vector3 facing = character.GetFacingDirection();
             float horizontal = inputs.MovementIntention.x;
+            bool turning = false;
+
             if (Mathf.Abs(horizontal) > 0.1)
             {
+                turning = true;
                 float degrees = horizontal * TurnSpeedDegreesPerSecond * deltaTime;
                 Quaternion rot = Quaternion.Euler(0, degrees, 0);
                 facing = rot * facing;
                 character.SetFacingDirection(facing);
+            }
+
+            if (character is PlayerCharacter playerCharacter)
+            {
+                playerCharacter.Animator.SetBool("nerdRotating", turning);
+                playerCharacter.Animator.SetBool("nerdRotatingLeft", horizontal < 0.0f);
             }
 
             Vector3 intendedMove = inputs.MovementIntention.z * facing;

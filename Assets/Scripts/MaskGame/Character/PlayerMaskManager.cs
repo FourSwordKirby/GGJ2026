@@ -38,6 +38,7 @@ namespace MaskGame.Character
         {
             if (NextMaskState == MaskState.NONE)
             {
+                CurrentMaskPower.Step(Player, deltaTime);
                 return;
             }
 

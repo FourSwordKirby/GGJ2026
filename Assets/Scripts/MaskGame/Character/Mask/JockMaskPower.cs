@@ -15,6 +15,8 @@ namespace MaskGame.Character.Mask
 
         public override void OnEnterPower(PlayerCharacter character)
         {
+            base.OnEnterPower(character);
+
             CircleMod.LastFacingDir = character.GetFacingDirection();
         }
     }

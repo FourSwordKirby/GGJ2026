@@ -6,6 +6,8 @@ namespace MaskGame.Character.Mask
 {
     public class CheerleaderMaskPower : MaskPower
     {
+        public override MaskState MaskState => MaskState.CHEER;
+
         protected CheerleaderManager CheerManager;
         protected CheerModifier CheerModifier;
         protected CheerBeatCallbackInput QueuedInput;
@@ -34,6 +36,17 @@ namespace MaskGame.Character.Mask
         {
             CheerManager.RemoveBeatCallback(character);
             base.OnExitPower(character);
+        }
+
+        public override void Step(PlayerCharacter character, float deltaTime)
+        {
+            base.Step(character, deltaTime);
+
+            // TODO (imonh) Add a ground layer mask and do a raycast instead
+
+            bool isGrounded = Mathf.Abs(character.ExtendedRigidbody.Velocity.y) < 0.01f;
+
+            character.Animator.SetBool("cheerJump", !isGrounded);
         }
 
         protected void HandleBeatCallback(CheerBeatCallbackInput input)

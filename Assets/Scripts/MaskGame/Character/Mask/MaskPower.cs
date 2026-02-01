@@ -12,7 +12,10 @@ namespace MaskGame.Character.Mask
 
         public virtual void OnEnterPower(PlayerCharacter character)
         {
+            // need a trigger to not re-trigger AnyState transition
 
+            character.Animator.SetTrigger("modeTrigger");
+            character.Animator.SetInteger("mode", (int) MaskState);
         }
 
         public virtual void Step(PlayerCharacter character, float deltaTime)

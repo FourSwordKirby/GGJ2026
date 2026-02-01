@@ -10,6 +10,7 @@ namespace MaskGame.Character
     public class PlayerCharacter : MaskGameCharacter
     {
         public PlayerMaskManager MaskManager { get; private set; }
+        public Animator Animator { get; private set; }
 
         protected CharacterInputs InputsForNextFixedUpdate;
 
@@ -20,6 +21,7 @@ namespace MaskGame.Character
         {
             base.OnValidate();
             MaskManager = GetComponent<PlayerMaskManager>();
+            Animator = GetComponentInChildren<Animator>();
         }
 
         protected override void Start()

@@ -11,5 +11,13 @@ namespace MaskGame.Character.Modifier
         {
             return base.ComputeWalkingMovementImpulse(character, -intentedMove, deltaTime);
         }
+
+        public override void ApplyInputToCharacter(MaskGameCharacter character, CharacterInputs inputs, float deltaTime)
+        {
+            base.ApplyInputToCharacter(character, inputs, deltaTime);
+
+            Vector3 facing = Vector3.ProjectOnPlane(character.ExtendedRigidbody.Velocity, Vector3.up);
+            character.SetFacingDirection(-facing);
+        }
     }
 }

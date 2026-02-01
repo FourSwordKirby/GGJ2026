@@ -29,6 +29,11 @@ namespace MaskGame.Character.Modifier
                 rightOfFacing = -rightOfFacing;
             }
 
+            if (character is PlayerCharacter playerCharacter)
+            {
+                playerCharacter.Animator.SetBool("theaterLeft", !IsRight);
+            }
+
             Vector3 forcedIntention = inputs.MovementIntention + rightOfFacing;
             forcedIntention.Normalize();
             Vector3 impulse = ComputeWalkingMovementImpulse(character, forcedIntention, deltaTime);
