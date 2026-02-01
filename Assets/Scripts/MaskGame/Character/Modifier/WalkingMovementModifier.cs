@@ -29,6 +29,7 @@ namespace MaskGame.Character.Modifier
             float acceleration = WalkingAcceleration;
 
             impulse = targetVelocity - character.ExtendedRigidbody.Velocity;
+            impulse = Vector3.ProjectOnPlane(impulse, Vector3.up);
 
             // Clamp the max impulse so that it doesn't exceed our flying acceleration.
             float maxImpulseMagnitude = acceleration * deltaTime;
