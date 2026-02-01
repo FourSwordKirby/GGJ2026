@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4009032368366218999}
-  - component: {fileID: 7557477587886045122}
   - component: {fileID: 1108796919070625441}
+  - component: {fileID: 7557477587886045122}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -33,6 +33,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6832744925164994625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1108796919070625441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3567722980247285024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d8d00cf7b0264eb512cdaa91dd8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  loopingMenuBGM: {fileID: 0}
+  loopingLevelBGM: {fileID: 8300000, guid: 09adce42eb464884fba35661aa115425, type: 3}
+  SwitchMaskClip: {fileID: 8300000, guid: 3ebcae6c6a61f92479a08249c049b9b2, type: 3}
+  JockZoneClip: {fileID: 8300000, guid: 90a6f0249fb7bca4587abe7b47e6a104, type: 3}
+  NerdZoneClip: {fileID: 8300000, guid: 5fd7e1912423f6e47a27bca30814eabf, type: 3}
+  BusinessZoneClip: {fileID: 8300000, guid: 45f07c9956e8aa24a919a1a1debed671, type: 3}
+  CheerZoneClip: {fileID: 8300000, guid: 6ff1442937bd5e445b2e2b899d9e3392, type: 3}
+  OutOfTime: {fileID: 8300000, guid: 11c50b4d2de577145a14253fa4dc84bc, type: 3}
+  Last10Seconds: {fileID: 8300000, guid: f16f2af553993114b9635437f71ab12e, type: 3}
+  rootAudioSource: {fileID: 7557477587886045122}
 --- !u!82 &7557477587886045122
 AudioSource:
   m_ObjectHideFlags: 0
@@ -48,7 +70,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -130,25 +152,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1108796919070625441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567722980247285024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025d8d00cf7b0264eb512cdaa91dd8a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  SwitchMaskClip: {fileID: 8300000, guid: 3ebcae6c6a61f92479a08249c049b9b2, type: 3}
-  BusinessZoneClip: {fileID: 8300000, guid: 45f07c9956e8aa24a919a1a1debed671, type: 3}
-  JockZoneClip: {fileID: 0}
-  CheerZoneClip: {fileID: 0}
-  OutOfTime: {fileID: 8300000, guid: 11c50b4d2de577145a14253fa4dc84bc, type: 3}
-  Last10Seconds: {fileID: 8300000, guid: f16f2af553993114b9635437f71ab12e, type: 3}
-  rootAudioSource: {fileID: 7557477587886045122}
 --- !u!1 &7363367806636669522
 GameObject:
   m_ObjectHideFlags: 0

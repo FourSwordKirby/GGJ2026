@@ -3,9 +3,13 @@ using MaskGame.Character;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioClip loopingMenuBGM;
+    public AudioClip loopingLevelBGM;
+
     public AudioClip SwitchMaskClip;
-    public AudioClip BusinessZoneClip;
     public AudioClip JockZoneClip;
+    public AudioClip NerdZoneClip;
+    public AudioClip BusinessZoneClip;
     public AudioClip CheerZoneClip;
 
     public AudioClip OutOfTime;
@@ -23,6 +27,11 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
     }
 
+    public void StartLevelMusic()
+    {
+        rootAudioSource.generator = loopingLevelBGM;
+    }
+
     public void PlayMaskSwitch()
     {
         rootAudioSource.PlayOneShot(SwitchMaskClip);
@@ -38,6 +47,7 @@ public class AudioManager : MonoBehaviour
                 rootAudioSource.PlayOneShot(JockZoneClip);
                 break;
             case MaskState.NERD:
+                rootAudioSource.PlayOneShot(NerdZoneClip);
                 break;
             case MaskState.BASIC:
                 break;

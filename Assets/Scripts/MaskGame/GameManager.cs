@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         OnClassroomReached += PassPeriod;
 
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
+        AudioManager.instance.StartLevelMusic();
 
         OnStartPeriod(Period);
     }
