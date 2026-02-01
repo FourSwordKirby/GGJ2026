@@ -12,6 +12,8 @@ public class NPCJock : NPCCharacter
     protected override void InitChar()
     {
         maskClique = MaskState.JOCK;
+
+        base.InitChar();
     }
 
     protected override void InitTransform()

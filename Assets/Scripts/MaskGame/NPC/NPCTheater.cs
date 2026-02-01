@@ -25,6 +25,8 @@ public class NPCTheater : NPCCharacter
         {
             TheaterManager.RegisterCallback(this, HandleCallback);
         }
+
+        base.InitChar();
     }
 
     private void OnEnable()

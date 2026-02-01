@@ -9,9 +9,12 @@ public class StraightGuy : MonoBehaviour
     public float maxDistance = 50f;
     public float maxLifetime = 20f;
 
+    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+
     private Vector3 spawnPoint;
     public Vector3 moveDirection;
     private float timer = 0f;
+
 
     public void Start()
     {
@@ -21,6 +24,8 @@ public class StraightGuy : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(moveDirection);
         }
+
+        npcSettings?.ApplyObstacleColor(this.gameObject); 
     }
 
     void Update()

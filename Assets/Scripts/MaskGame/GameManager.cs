@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     float currentPhaseSetTime;
 
     public LevelManager LevelManager;
+    public NPCSettings NPCSettings;
 
     /// <summary>
     /// The number of periods we have implemented
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.StartLevelMusic();
 
 #if UNITY_EDITOR
-        Period = 1;
+        Period = 0;
 #endif
 
         OnStartPeriod(Period);

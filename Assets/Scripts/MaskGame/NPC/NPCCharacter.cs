@@ -4,8 +4,7 @@ using Random = UnityEngine.Random;
 
 public abstract class NPCCharacter : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] protected NPCSettings npcSettings;
+    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
 
     protected Animator animator;
 
@@ -29,7 +28,14 @@ public abstract class NPCCharacter : MonoBehaviour
         InitTransform();
     }
 
-    protected abstract void InitChar();
+    protected virtual void InitChar()
+    {
+        foreach (SkinnedMeshRenderer m in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            m.materials[0].color = npcSettings.ColorFromMask(maskClique);
+        }
+    }
+
     protected abstract void InitTransform();
     protected abstract void UpdateMovement();
 

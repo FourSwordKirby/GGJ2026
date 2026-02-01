@@ -706,7 +706,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCZone
   maskClique: 4
   renderGizmo: 0
-  npcSettings: {fileID: 11400000, guid: 0881d1aff57886e40aefd3f1ef4536bd, type: 2}
   referenceLibrary: {fileID: 11400000, guid: 07d76bf598dcbf74f83a9bd093b756b2, type: 2}
 --- !u!1 &74933321
 GameObject:
@@ -1945,7 +1944,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCZone
   maskClique: 2
   renderGizmo: 0
-  npcSettings: {fileID: 11400000, guid: 0881d1aff57886e40aefd3f1ef4536bd, type: 2}
   referenceLibrary: {fileID: 11400000, guid: 07d76bf598dcbf74f83a9bd093b756b2, type: 2}
 --- !u!114 &251669871
 MonoBehaviour:
@@ -6252,7 +6250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCZone
   maskClique: 0
   renderGizmo: 0
-  npcSettings: {fileID: 11400000, guid: 0881d1aff57886e40aefd3f1ef4536bd, type: 2}
   referenceLibrary: {fileID: 11400000, guid: 07d76bf598dcbf74f83a9bd093b756b2, type: 2}
 --- !u!1 &1238379711
 GameObject:
@@ -9060,6 +9057,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: NPCSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 0881d1aff57886e40aefd3f1ef4536bd, type: 2}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: LevelManager.GameStartTransform
       value: 
       objectReference: {fileID: 529577134}
@@ -9632,7 +9633,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCZone
   maskClique: 2
   renderGizmo: 0
-  npcSettings: {fileID: 11400000, guid: 0881d1aff57886e40aefd3f1ef4536bd, type: 2}
   referenceLibrary: {fileID: 11400000, guid: 07d76bf598dcbf74f83a9bd093b756b2, type: 2}
 --- !u!114 &1878229066
 MonoBehaviour:

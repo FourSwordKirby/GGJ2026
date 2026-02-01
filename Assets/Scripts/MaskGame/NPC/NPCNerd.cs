@@ -22,6 +22,8 @@ public class NPCNerd : NPCCharacter
     protected override void InitChar()
     {
         maskClique = MaskState.NERD;
+
+        base.InitChar();
     }
 
     protected override void InitTransform()

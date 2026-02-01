@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf171a39fdb76f04287fb6fe01a46a35, type: 3}
   m_Name: NPCSettings
   m_EditorClassIdentifier: Assembly-CSharp::NPCSettings
+  jockColor: {r: 1, g: 0, b: 0, a: 1}
   jockRunRadius: 0.5
   jockRunVelocity: 5
+  cheerColor: {r: 1, g: 0.97245634, b: 0, a: 1}
   cheerHopDist: 2.5
+  businessColor: {r: 0, g: 0.23198485, b: 1, a: 1}
   businessWalkSpeed: 2.5
   businessMarchTimeRange: {x: 0.2, y: 1}
+  nerdColor: {r: 0, g: 1, b: 0.025017977, a: 1}
   nerdWalkSpeed: 9
   nerdMarchTimeRange: {x: 0.5, y: 1.2}
   nerdRotationMax: 75
   nerdRotationSpeed: 200
+  theaterColor: {r: 0.3056603, g: 0.3056603, b: 0.3056603, a: 1}
   theaterMoveSpeed: 3.5
-  theaterSwitchTime: 1
+  obstacleColor: {r: 0.4867924, g: 0.4867924, b: 0.4867924, a: 1}

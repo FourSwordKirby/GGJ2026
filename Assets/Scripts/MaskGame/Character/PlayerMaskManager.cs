@@ -14,6 +14,8 @@ namespace MaskGame.Character
         public MaskState CurrentMaskState = MaskState.BASIC;
         public MaskPower CurrentMaskPower => MaskMap[CurrentMaskState];
 
+        protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+
         public Dictionary<MaskState, MaskPower> MaskMap { get; private set; } = new Dictionary<MaskState, MaskPower>()
         {
             { MaskState.BASIC, new BasicMaskPower() },
@@ -27,6 +29,7 @@ namespace MaskGame.Character
         private void OnValidate()
         {
             Player = GetComponent<PlayerCharacter>();
+            RefreshTint();
         }
 
         public void QueueNextMaskState(MaskState nextMaskState)
@@ -49,45 +52,25 @@ namespace MaskGame.Character
 
             CurrentMaskPower.Step(Player, deltaTime);
 
-            switch (CurrentMaskState)
+            RefreshTint();
+        }
+
+        void RefreshTint()
+        {
+            if (!npcSettings)
+                return;
+
+            Color targetColor = Color.white;
+
+            if (CurrentMaskState != MaskState.BASIC)
             {
-                case MaskState.BUSINESS:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.blue;
-                    }
-                    break;
-                case MaskState.CHEER:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.yellow;
-                    }
-                    break;
-                case MaskState.NERD:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.green;
-                    }
-                    break;
-                case MaskState.JOCK:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.red;
-                    }
-                    break;
-                case MaskState.THEATER:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.black;
-                    }
-                    break;
-                case MaskState.BASIC:
-                default:
-                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
-                    {
-                        m.materials[0].color = Color.white;
-                    }
-                    break;
+                targetColor = npcSettings.ColorFromMask(CurrentMaskState);
+                targetColor = Color.Lerp(targetColor, Color.white, 0.5f);
+            }
+
+            foreach (SkinnedMeshRenderer m in GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                m.materials[0].color = targetColor;
             }
         }
 

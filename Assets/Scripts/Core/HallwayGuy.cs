@@ -10,9 +10,13 @@ public class HallwayGuy : MonoBehaviour
     public float moveDuration = 3.0f; 
     public float waitTime = 1.0f; 
 
+    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+
     private void Start()
     {
         StartCoroutine(MoveRoutine());
+
+        npcSettings?.ApplyObstacleColor(this.gameObject); 
     }
 
     private IEnumerator MoveRoutine()

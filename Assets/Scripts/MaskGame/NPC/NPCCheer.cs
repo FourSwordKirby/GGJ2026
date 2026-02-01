@@ -39,6 +39,8 @@ public class NPCCheer : NPCCharacter
         {
             CheerManager.RegisterBeatCallback(this, HandleBeatCallback);
         }
+
+        base.InitChar();
     }
 
     void OnDestroy()

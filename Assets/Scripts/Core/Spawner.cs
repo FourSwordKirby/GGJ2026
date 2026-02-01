@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     public float minSpawnTime = 1f;
     public float maxSpawnTime = 5f;
 
+    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+
     private BoxCollider spawnArea;
 
     private Transform spawnGroup;
@@ -25,7 +27,10 @@ public class Spawner : MonoBehaviour
 
     private void OnDisable()
     {
-        Destroy(spawnGroup.gameObject);
+        if (spawnGroup)
+        {
+            Destroy(spawnGroup.gameObject);
+        }
     }
 
     public IEnumerator SpawnRoutine()

@@ -27,6 +27,8 @@ public class NPCBusiness : NPCCharacter
     protected override void InitChar()
     {
         maskClique = MaskState.BUSINESS;
+
+        base.InitChar();
     }
 
     protected override void InitTransform()

@@ -11,8 +11,9 @@ public class NPCZone : MonoBehaviour
     [SerializeField] private bool renderGizmo = false;
 
     [Header("References")]
-    [SerializeField] private NPCSettings npcSettings;
     [SerializeField] private ReferenceLibrary referenceLibrary;
+
+    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
 
     private Rect rectBounds;
     private Transform spawnGroup;
@@ -26,7 +27,10 @@ public class NPCZone : MonoBehaviour
 
     private void OnDisable()
     {
-        Destroy(spawnGroup.gameObject);
+        if (spawnGroup)
+        {
+            Destroy(spawnGroup.gameObject);
+        }
     }
 
     void Update()
