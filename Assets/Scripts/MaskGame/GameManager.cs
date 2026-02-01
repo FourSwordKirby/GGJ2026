@@ -11,6 +11,18 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GamePhase
+    {
+        GameStart,
+        PeriodStart,
+        PeriodInProgress,
+        PeriodEnd,
+        LevelComplete,
+        GameOver
+    }
+
+    public GamePhase currentPhase;
+
     public LevelManager LevelManager;
 
     /// <summary>
@@ -86,8 +98,8 @@ public class GameManager : MonoBehaviour
         InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
         Keyboard.current.spaceKey.IsPressed();
         OnStartPeriod += StartPeriod;
-        OnTimeLimitReached += FailLevel;
-        OnClassroomReached += CheckObjectiveReached;
+        OnTimeLimitReached += OutOfTime;
+        OnClassroomReached += PassPeriod;
 
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
 
@@ -100,15 +112,86 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    // dumb hack
+    float phaseTransitionTime = 0.0f;
+    float fadeTime = 2.0f;
     void Update()
     {
-        UpdateTimeRemaining();
-        UpdatePopularity();
-
+        switch (currentPhase)
+        {
+            case GamePhase.PeriodStart:
+                while (phaseTransitionTime < fadeTime)
+                {
+                    phaseTransitionTime += Time.deltaTime;
+                    break;
+                }
+                currentPhase = GamePhase.PeriodInProgress;
+                break;
+            case GamePhase.PeriodInProgress:
+                UpdateTimeRemaining();
+                UpdatePopularity();
+                break;
+            case GamePhase.PeriodEnd:
+                while (phaseTransitionTime < fadeTime)
+                {
+                    phaseTransitionTime += Time.deltaTime;
+                    break;
+                }
+                AdvancePeriod();
+                currentPhase = GamePhase.PeriodStart;
+                phaseTransitionTime = 0.0f;
+                break;
+            case GamePhase.LevelComplete:
+                break;
+            case GamePhase.GameOver:
+                if (Keyboard.current.rKey.wasPressedThisFrame)
+                {
+                    currentPhase = GamePhase.GameStart;
+                }
+                break;
+        }
         if (Keyboard.current.rKey.IsPressed())
         {
             Reload();
         }
+    }
+
+    public void PassPeriod(Classroom classroom)
+    {
+        if(classroom == GoalClassroom)
+        {
+            ScreenTransitionManager.instance.FadeOut(2.0f);
+            PromptUI.ShowPrompt("Period Cleared!");
+            currentPhase = GamePhase.PeriodEnd;
+        }
+    }
+
+    public void RegisterLevelComplete()
+    {
+        currentPhase = GamePhase.LevelComplete;
+    }
+
+    public void OutOfTime()
+    {
+        ScreenTransitionManager.instance.FadeOut(fadeTime);
+
+        PromptUI.ShowPrompt($"Out of Time");
+        currentPhase = GamePhase.GameOver;
+    }
+    public void OutOfPopularity()
+    {
+        ScreenTransitionManager.instance.FadeOut(fadeTime);
+
+        PromptUI.ShowPrompt($"Out of Popularity");
+        currentPhase = GamePhase.GameOver;
+    }
+    private string FormatPeriod(int value)
+    {
+        var digit = value % 10;
+        return (value != 11 && digit == 1) ? value + "st" :
+           value != 12 && digit == 2 ? value + "nd" :
+           value != 13 && digit == 3 ? value + "rd" :
+           value + "th";
     }
 
     void UpdateTimeRemaining()
@@ -124,7 +207,7 @@ public class GameManager : MonoBehaviour
         if (player.IsInMismatchedZone())
         {
             MismatchedMaskStateDuration += Time.deltaTime;
-            TempUIManager.ShowMismatchAlert();
+            PromptUI.instance.ShowAlert = true;
         }
         else
         {
@@ -138,30 +221,13 @@ public class GameManager : MonoBehaviour
         Popularity = Math.Clamp(Popularity, 0, MaximumPopularity);
         if (Popularity <= 0)
         {
-            FailLevelByPopularity();
+            OutOfPopularity();
         }
     }
 
     void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    void FailLevel()
-    {
-        Debug.Log("Level Failed");
-        TempUIManager.DisplayLossTime(Reload);
-    }
-
-    void FailLevelByPopularity()
-    {
-        TempUIManager.DisplayLossPopularity(Reload);
-    }
-
-    void CheckObjectiveReached(Classroom classroom)
-    {
-        if(classroom == GoalClassroom)
-            AdvancePeriod();
     }
 
     void AdvancePeriod()
@@ -178,13 +244,15 @@ public class GameManager : MonoBehaviour
 
     void StartPeriod(int period)
     {
-        Debug.Log($"Starting Period {period}");
+        ScreenTransitionManager.instance.FadeIn(2.0f);
+        string periodName = FormatPeriod(period);
+        PromptUI.ShowPrompt($"Get to {periodName} Period!");
+        currentPhase = GamePhase.PeriodStart;
+
         TimeRemaining = MaximumTime;
         Classroom previousGoalClassroom = GoalClassroom;
         GoalClassroom = LevelManager.SelectGoalClassroom(previousGoalClassroom);
         LevelManager.SetClassroomAsGoal(GoalClassroom);
-
-        TempUIManager.DisplayStartTitle(null);
     }
 }
 

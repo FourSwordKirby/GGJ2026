@@ -1,4 +1,5 @@
 using MaskGame.Character;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +7,10 @@ using UnityEngine;
 /// </summary>
 public class PromptUI : MonoBehaviour
 {
-    public GameObject indicator;
+    public Animator promptAnimator;
+    public TextMeshProUGUI promptText;
+    public GameObject Alert;
+    public bool ShowAlert = false;
 
     public static PromptUI instance;
 
@@ -18,13 +22,28 @@ public class PromptUI : MonoBehaviour
             Destroy(this.gameObject);
     }
 
+    public void Update()
+    {
+        if (ShowAlert != Alert.activeSelf)
+        {
+            Alert.SetActive(ShowAlert);
+        }
+        ShowAlert = false;
+    }
+
+    public static void ShowPrompt(string text)
+    {
+        instance.promptText.text = text;
+        instance.promptAnimator.SetTrigger("Show");
+    }
+
     public static void ShowMaskChangButtonPrompt(MaskState TargetMaskState)
     {
-        instance.indicator.SetActive(true);
+        //instance.indicator.SetActive(true);
     }
 
     public static void HideMaskChangButtonPrompt()
     {
-        instance.indicator.SetActive(false);
+        //instance.indicator.SetActive(false);
     }
 }
