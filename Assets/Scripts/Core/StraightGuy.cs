@@ -13,9 +13,9 @@ public class StraightGuy : MonoBehaviour
     private Vector3 moveDirection;
     private float timer = 0f;
 
-    public void Initialize(Vector3 direction)
+    public void Start()
     {
-        moveDirection = direction.normalized;
+        moveDirection = transform.forward;
         spawnPoint = transform.position;
 
         if (moveDirection != Vector3.zero)
