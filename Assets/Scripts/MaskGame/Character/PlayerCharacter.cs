@@ -76,15 +76,12 @@ namespace MaskGame.Character
 
         protected void HandleInputsForZoneOverlaps()
         {
-            if (CurrentZone != null)
-            {
-                // Find/Get UI Manager and request button prompt UI
+            // Find/Get UI Manager and request button prompt UI
 
-                if (InputsForNextFixedUpdate.TriggerToggle)
-                {
-                    AudioManager.instance.PlayMaskSwitch();
-                    MaskManager.QueueNextMaskState(CurrentZone.ZoneMaskState);
-                }
+            if (InputsForNextFixedUpdate.TriggerToggle)
+            {
+                AudioManager.instance.PlayMaskSwitch();
+                MaskManager.QueueNextMaskState(CurrentZone?.ZoneMaskState ?? MaskState.BASIC);
             }
         }
 

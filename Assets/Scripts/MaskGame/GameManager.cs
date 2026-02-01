@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         if(classroom == GoalClassroom)
         {
+            AudioManager.instance.PlayPeriodPassed ();
             ScreenTransitionManager.instance.FadeOut(2.0f);
             PromptUI.ShowPrompt("Period Cleared!");
             currentPhase = GamePhase.PeriodEnd;
@@ -232,7 +233,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Reload()
+    public void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -257,9 +258,7 @@ public class GameManager : MonoBehaviour
         currentPhase = GamePhase.PeriodStart;
 
         TimeRemaining = MaximumTime;
-        Classroom previousGoalClassroom = GoalClassroom;
-        GoalClassroom = LevelManager.SelectGoalClassroom(previousGoalClassroom);
-        LevelManager.SetClassroomAsGoal(GoalClassroom);
+        LevelManager.StartPeriod(period);
     }
 }
 
@@ -269,21 +268,43 @@ public class GameManager : MonoBehaviour
 [Serializable]
 public class LevelManager
 {
-    public List<Classroom> Classrooms;
+    public List<Period> Periods;
 
-    public void SetClassroomAsGoal(Classroom goalClassroom)
+    public void StartPeriod(int period)
     {
-        foreach(Classroom room in Classrooms)
+        if(period > Periods.Count)
         {
-            room.SetAsNeutral();
+            Debug.Log("YOU COMPLETED THEM ALL, Reloading the scene and restarting the game");
+            GameManager.instance.Reload();
         }
 
-        goalClassroom.SetAsGoal();
+        foreach(Period p in Periods)
+        {
+            foreach (var obj in p.RelevantObjects)
+            {
+                obj.SetActive(true);
+            }
+            p.GoalClassroom.SetAsNeutral();
+
+        }
+
+        foreach (var obj in Periods[period].RelevantObjects)
+        {
+            obj.SetActive(true);
+        }
+        Periods[period].GoalClassroom.SetAsGoal();
     }
 
-    internal Classroom SelectGoalClassroom(Classroom previousClassroom)
-    {
-        var SelectableClassrooms = Classrooms.Where(x => x != previousClassroom).ToList();
-        return SelectableClassrooms[Random.Range(0, SelectableClassrooms.Count)];
-    }
+    //internal Classroom SelectGoalClassroom(Classroom previousClassroom)
+    //{
+    //    var SelectableClassrooms = Classrooms.Where(x => x != previousClassroom).ToList();
+    //    return SelectableClassrooms[Random.Range(0, SelectableClassrooms.Count)];
+    //}
+}
+
+[Serializable]
+public class Period
+{
+    public Classroom GoalClassroom;
+    public List<GameObject> RelevantObjects;
 }
