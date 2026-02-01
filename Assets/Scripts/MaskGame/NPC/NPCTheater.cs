@@ -23,6 +23,7 @@ public class NPCTheater : NPCCharacter
 	protected override void UpdateMovement()
     {
         velocity = DirSign() * transform.right * npcSettings.theaterMoveSpeed;
+        animator.SetBool("left", DirSign() < 0);
     }
 
     float DirSign()

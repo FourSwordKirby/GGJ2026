@@ -7,6 +7,8 @@ public abstract class NPCCharacter : MonoBehaviour
     [Header("References")]
     [SerializeField] protected NPCSettings npcSettings;
 
+    protected Animator animator;
+
     protected MaskState maskClique;
     protected NPCZone owningZone;
 
@@ -18,6 +20,8 @@ public abstract class NPCCharacter : MonoBehaviour
 
     public void Init(NPCZone owningZone)
     {
+        animator = GetComponentInChildren<Animator>();
+
         this.owningZone = owningZone;
         spawnTime = Time.time;
 

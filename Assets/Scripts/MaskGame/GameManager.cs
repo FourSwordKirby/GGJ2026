@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         OnClassroomReached += PassPeriod;
 
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
+        AudioManager.instance.StartLevelMusic();
 
         OnStartPeriod(Period);
     }
@@ -174,6 +175,7 @@ public class GameManager : MonoBehaviour
     public void OutOfTime()
     {
         ScreenTransitionManager.instance.FadeOut(fadeTime);
+        AudioManager.instance.PlayOutOfTime();
 
         PromptUI.ShowPrompt($"Out of Time");
         currentPhase = GamePhase.GameOver;
@@ -197,6 +199,11 @@ public class GameManager : MonoBehaviour
     void UpdateTimeRemaining()
     {
         TimeRemaining -= Time.deltaTime;
+        if(TimeRemaining + Time.deltaTime >= 10.0f && 10.0f > TimeRemaining)
+        {
+            AudioManager.instance.PlayLast10Seconds();
+        }
+
         if (TimeRemaining < 0.0f)
             OnTimeLimitReached();
     }

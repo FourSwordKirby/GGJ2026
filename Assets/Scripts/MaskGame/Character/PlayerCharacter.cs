@@ -63,6 +63,10 @@ namespace MaskGame.Character
             }
             else
             {
+                // if we're assining the current zone for the first time, we just entered this zone and need to play a sfx
+                if (CurrentZone == null)
+                    AudioManager.instance.PlayZoneEnter(OverlappedZones[0].ZoneMaskState);
+
                 CurrentZone = OverlappedZones[0];
             }
 
@@ -78,6 +82,7 @@ namespace MaskGame.Character
 
                 if (InputsForNextFixedUpdate.TriggerToggle)
                 {
+                    AudioManager.instance.PlayMaskSwitch();
                     MaskManager.QueueNextMaskState(CurrentZone.ZoneMaskState);
                 }
             }

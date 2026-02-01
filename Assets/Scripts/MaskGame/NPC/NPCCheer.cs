@@ -79,9 +79,24 @@ public class NPCCheer : NPCCharacter
 
         switch (hopKind)
         {
+            case HopKind.LEFT:
+            case HopKind.RIGHT:
+                {
+                    animator.SetBool("left", hopKind == HopKind.LEFT);
+                    animator.SetBool("jump", true);
+                }
+                break;
+
             case HopKind.NEUTRAL:
                 {
                     neutralHopPos = transform.position;
+                    animator.SetBool("jump", true);
+                }
+                break;
+
+            case HopKind.NIL:
+                {
+                    animator.SetBool("jump", false);
                 }
                 break;
         }
