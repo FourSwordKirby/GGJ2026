@@ -35,7 +35,7 @@ public class NPCZone : MonoBehaviour
 
             case MaskState.CHEER:
                 {
-                    SpawnNPCGrid(unitSize: 5);
+                    SpawnNPCGrid(unitSize: 5, offsetLimit: 0.2f);
 
                 }
                 break;

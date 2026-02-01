@@ -9,7 +9,6 @@ public class NPCSettings : ScriptableObject
 
     [Header("Cheerleader")]
     public float cheerHopDist;
-    public float cheerHopTime;
 
     [Header("Business")]
     public float businessWalkSpeed;
