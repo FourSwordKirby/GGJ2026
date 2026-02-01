@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
                     phaseTransitionTime += Time.deltaTime;
                     break;
                 }
+                AdvancePeriod();
                 currentPhase = GamePhase.PeriodStart;
                 phaseTransitionTime = 0.0f;
                 break;
@@ -160,6 +161,7 @@ public class GameManager : MonoBehaviour
         if(classroom == GoalClassroom)
         {
             ScreenTransitionManager.instance.FadeOut(2.0f);
+            PromptUI.ShowPrompt("Period Cleared!");
             currentPhase = GamePhase.PeriodEnd;
         }
     }
@@ -226,18 +228,6 @@ public class GameManager : MonoBehaviour
     void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    void FailLevel()
-    {
-        Debug.Log("Level Failed");
-        TempUIManager.DisplayLossTime(Reload);
-    }
-
-    void CheckObjectiveReached(Classroom classroom)
-    {
-        if(classroom == GoalClassroom)
-            AdvancePeriod();
     }
 
     void AdvancePeriod()
