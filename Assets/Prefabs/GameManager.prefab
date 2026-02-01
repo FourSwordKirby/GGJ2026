@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4687861161432411321}
   - component: {fileID: 688779522849761114}
   - component: {fileID: 8014636329379880541}
+  - component: {fileID: 7315594010464467839}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b35e88ee87fa9746a7d8c606cdfb723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  currentPhase: 0
   LevelManager:
-    Classrooms:
-    - {fileID: 0}
+    GameStartTransform: {fileID: 0}
+    Periods: []
   MaximumTime: 100
   Popularity: 100
   PopularityDecayCurve:
@@ -81,7 +83,6 @@ MonoBehaviour:
   player: {fileID: 0}
   CheerleaderManager: {fileID: 8014636329379880541}
   Period: 0
-  GoalClassroom: {fileID: 0}
   TimeRemaining: 0
 --- !u!114 &8014636329379880541
 MonoBehaviour:
@@ -95,4 +96,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33156b7f895657849bdba4db34fd9c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaskGame.Cheerleader.CheerleaderManager
+  TimeBetweenBeatsSeconds: 1
+--- !u!114 &7315594010464467839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5942813617532455152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0219955c2fc22469a781daac3fb674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MaskGame.Theater.TheaterManager
   TimeBetweenBeatsSeconds: 1

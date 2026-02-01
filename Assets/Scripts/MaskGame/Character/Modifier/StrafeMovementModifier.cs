@@ -5,18 +5,18 @@ namespace MaskGame.Character.Modifier
 {
     public class StrafeMovementModifier : WalkingMovementModifier
     {
-        public float ElapsedTime = 0.0f;
-        public float SwitchTime = 1.0f;
+        // public float ElapsedTime = 0.0f;
+        // public float SwitchTime = 1.0f;
         public bool IsRight = true;
 
         public override void ApplyInputToCharacter(MaskGameCharacter character, CharacterInputs inputs, float deltaTime)
         {
-            ElapsedTime += deltaTime;
-            while (ElapsedTime > SwitchTime)
-            {
-                ElapsedTime -= SwitchTime;
-                IsRight = !IsRight;
-            }
+            // ElapsedTime += deltaTime;
+            // while (ElapsedTime > SwitchTime)
+            // {
+            //     ElapsedTime -= SwitchTime;
+            //     IsRight = !IsRight;
+            // }
 
             if (inputs.MovementIntention.magnitude > 0.2f)
             {

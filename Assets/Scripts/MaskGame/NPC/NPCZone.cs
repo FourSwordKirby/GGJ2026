@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
 using MaskGame.Character;
+using MaskGame.Theater;
 
 public class NPCZone : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class NPCZone : MonoBehaviour
 
             case MaskState.THEATER:
                 {
-                    float marginHori = npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime * 1.02f;
+                    float marginHori = npcSettings.theaterMoveSpeed * TheaterManager.TimeBetweenBeatsSeconds * 1.02f;
                     SpawnNPCGrid(unitSize: 1, offsetLimit: 0.3f, marginHori: marginHori, marginVert: 0.8f);
                 }
                 break;

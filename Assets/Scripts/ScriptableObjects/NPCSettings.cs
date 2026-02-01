@@ -22,7 +22,6 @@ public class NPCSettings : ScriptableObject
 
     [Header("Theater")]
     public float theaterMoveSpeed;
-    public float theaterSwitchTime;
 
     // Jock
 

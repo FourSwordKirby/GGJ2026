@@ -50,7 +50,11 @@ namespace MaskGame.Character
         {
             HandleZones();
             MaskManager.Step(deltaTime);
-            MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
+
+            if (GameManager.instance?.currentPhase == GameManager.GamePhase.PeriodInProgress)
+            {
+                MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
+            }
 
             InputsForNextFixedUpdate.TriggerToggle = false;
 
