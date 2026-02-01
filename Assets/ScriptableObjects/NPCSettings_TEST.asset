@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf171a39fdb76f04287fb6fe01a46a35, type: 3}
-  m_Name: NPCSettings
+  m_Name: NPCSettings_TEST
   m_EditorClassIdentifier: Assembly-CSharp::NPCSettings
-  jockRunRadius: 0.5
-  jockRunVelocity: 5
-  cheerHopDist: 2.5
-  businessWalkSpeed: 5
-  businessMarchTimeRange: {x: 0.2, y: 1}
-  nerdWalkSpeed: 9
-  nerdMarchTimeRange: {x: 0.5, y: 1.2}
-  nerdRotationMax: 75
-  nerdRotationSpeed: 200
-  theaterMoveSpeed: 3.5
+  jockRunRadius: 1
+  jockRunVelocity: 10
+  cheerHopDist: 5
+  businessWalkSpeed: 10
+  businessMarchTimeRange: {x: 3, y: 7}
+  nerdWalkSpeed: 25
+  nerdMarchTimeRange: {x: 1, y: 5}
+  nerdRotationMax: 150
+  nerdRotationSpeed: 400
+  theaterMoveSpeed: 7
   theaterSwitchTime: 1

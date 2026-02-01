@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7006e07405271794c873326de82cc0eb, type: 3}
+  m_Name: ReferenceLibrary_TEST
+  m_EditorClassIdentifier: Assembly-CSharp::ReferenceLibrary
+  npcJockPrefab: {fileID: 4206748058361165353, guid: 676c615186e555340bf720214f837854, type: 3}
+  npcCheerPrefab: {fileID: 4206748058361165353, guid: 50adc8343a4b12741a1108ad5ee92632, type: 3}
+  npcBusinessPrefab: {fileID: 4206748058361165353, guid: 67fed57024749e742bbb79dd26351b40, type: 3}
+  npcNerdPrefab: {fileID: 4206748058361165353, guid: 9ac67f831a9b39d40b951d975527470e, type: 3}
+  npcTheaterPrefab: {fileID: 4206748058361165353, guid: d4162ae0d3246fa4eaabc04a37c4b359, type: 3}

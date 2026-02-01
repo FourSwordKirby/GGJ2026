@@ -29,44 +29,45 @@ public class NPCZone : MonoBehaviour
         {
             case MaskState.JOCK:
                 {
-                    SpawnNPCGrid(unitSize: 4, offsetLimit: 1);
+                    SpawnNPCGrid(unitSize: 2, offsetLimit: 0.5f);
                 }
                 break;
 
             case MaskState.CHEER:
                 {
-                    SpawnNPCGrid(unitSize: 5, offsetLimit: 0.2f);
+                    float marginHori = npcSettings.cheerHopDist * 1.02f;
+                    SpawnNPCGrid(unitSize: 2.5f, offsetLimit: 0.2f, marginHori: marginHori);
 
                 }
                 break;
 
             case MaskState.BUSINESS:
                 {
-                    SpawnNPCGrid(unitSize: 4, populationRatio: 0.6f);
+                    SpawnNPCGrid(unitSize: 2, populationRatio: 0.8f);
                 }
                 break;
 
             case MaskState.NERD:
                 {
-                    SpawnNPCGrid(unitSize: 4, populationRatio: 0.3f);
+                    SpawnNPCGrid(unitSize: 2, populationRatio: 0.8f);
                 }
                 break;
 
             case MaskState.THEATER:
                 {
-                    float marginHori = npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime * 1.05f;
-                    SpawnNPCGrid(unitSize: 3, offsetLimit: 0.5f, marginHori: marginHori, marginVert: 3);
+                    float marginHori = npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime * 1.02f;
+                    SpawnNPCGrid(unitSize: 1, offsetLimit: 0.3f, marginHori: marginHori, marginVert: 0.8f);
                 }
                 break;
         }
     }
 
     void SpawnNPCGrid(
-        float unitSize = 1,
+        float unitSize = 0.5f,
         float offsetLimit = 0,
         float populationRatio = 1.0f,
-        float marginHori = 1.0f,
-        float marginVert = 1.0f)
+        float marginHori = 0.5f,
+        float marginVert = 0.5f)
     {
         // Get spawn points
 
