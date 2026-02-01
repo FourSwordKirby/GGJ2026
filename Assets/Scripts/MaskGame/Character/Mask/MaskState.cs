@@ -7,5 +7,6 @@ namespace MaskGame.Character
         NERD,
         BASIC,
         BUSINESS,
+        CHEER,
     }
 }

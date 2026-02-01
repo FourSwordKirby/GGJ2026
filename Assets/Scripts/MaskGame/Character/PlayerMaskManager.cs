@@ -12,10 +12,12 @@ namespace MaskGame.Character
 
         public MaskState NextMaskState;
         public MaskState CurrentMaskState = MaskState.BASIC;
+        public MaskPower CurrentMaskPower => MaskMap[CurrentMaskState];
 
         public Dictionary<MaskState, MaskPower> MaskMap { get; private set; } = new Dictionary<MaskState, MaskPower>()
         {
             { MaskState.BASIC, new BasicMaskPower() },
+            { MaskState.CHEER, new CheerleaderMaskPower() },
             { MaskState.BUSINESS, new BusinessMaskPower() },
         };
 
@@ -36,20 +38,30 @@ namespace MaskGame.Character
                 return;
             }
 
+            CurrentMaskPower.OnExitPower(Player);
             CurrentMaskState = NextMaskState;
+            CurrentMaskPower.OnEnterPower(Player);
             NextMaskState = MaskState.NONE;
+
+            CurrentMaskPower.Step(Player, deltaTime);
 
             switch (CurrentMaskState)
             {
                 case MaskState.BUSINESS:
-                    foreach (MeshRenderer m in Player.GetComponentsInChildren<MeshRenderer>())
+                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
                     {
                         m.materials[0].color = Color.blue;
                     }
                     break;
+                case MaskState.CHEER:
+                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
+                    {
+                        m.materials[0].color = Color.yellow;
+                    }
+                    break;
                 case MaskState.BASIC:
                 default:
-                    foreach (MeshRenderer m in Player.GetComponentsInChildren<MeshRenderer>())
+                    foreach (MeshRenderer m in GetComponentsInChildren<MeshRenderer>())
                     {
                         m.materials[0].color = Color.white;
                     }

@@ -51,6 +51,8 @@ namespace MaskGame.Character
             MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
 
             InputsForNextFixedUpdate = new CharacterInputs();
+
+            ExtendedRigidbody.ApplyGravityImpulse(deltaTime);
         }
 
         protected void HandleZones()

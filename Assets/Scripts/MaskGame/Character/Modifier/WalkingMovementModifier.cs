@@ -14,9 +14,12 @@ namespace MaskGame.Character.Modifier
         {
             Vector3 impulse = ComputeWalkingMovementImpulse(character, inputs.MovementIntention, deltaTime);
             character.ExtendedRigidbody.ApplyImpulse(impulse, true);
+
+            Vector3 facing = Vector3.ProjectOnPlane(character.ExtendedRigidbody.Velocity, Vector3.up);
+            character.SetFacingDirection(facing);
         }
 
-        protected Vector3 ComputeWalkingMovementImpulse(MaskGameCharacter character, Vector3 intentedMove, float deltaTime)
+        protected virtual Vector3 ComputeWalkingMovementImpulse(MaskGameCharacter character, Vector3 intentedMove, float deltaTime)
         {
             Vector3 xzInputDirection = intentedMove;
             xzInputDirection.y = 0.0f;
