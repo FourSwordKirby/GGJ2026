@@ -297,6 +297,10 @@ public class GameManager : MonoBehaviour
         // While the player's mask is mismatched, tick the timer up.
         if (player.IsInMismatchedZone())
         {
+            // Play sfx when losing popularity for the first time;
+            if (MismatchedMaskStateDuration == 0)
+                AudioManager.instance.PlayLosingPopularity();
+
             MismatchedMaskStateDuration += Time.deltaTime;
             PromptUI.instance.ShowAlert = true;
         }

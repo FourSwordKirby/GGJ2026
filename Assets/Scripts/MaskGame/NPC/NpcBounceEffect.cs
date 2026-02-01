@@ -7,6 +7,17 @@ public class NpcBounceEffect : MonoBehaviour
     public float DepenetrationRate = 0.5f;
     public float CharacterRadius = 0.5f;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
+        if (player == null)
+        {
+            return;
+        }
+        // First time contact is made, play the hit sfx:
+        AudioManager.instance.PlayOnHit();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
