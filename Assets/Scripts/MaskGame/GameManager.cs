@@ -26,9 +26,9 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager;
 
     /// <summary>
-    /// The amount of time the player has to reach the objective
+    /// The number of periods we have implemented
     /// </summary>
-    public const int MaxPeriod = 1;
+    public const int MaxPeriod = 2;
     /// <summary>
     /// The amount of time the player has to reach the objective
     /// </summary>
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     public CheerleaderManager CheerleaderManager;
 
     public int Period;
-    public Classroom GoalClassroom;
+    public Classroom GoalClassroom => LevelManager.Periods[Period].GoalClassroom;
     public float TimeRemaining;
 
     public Action<int> OnStartPeriod;
@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
         if (Period >= MaxPeriod)
         {
             Debug.Log("Max Period Reached");
-            TempUIManager.DisplayWin(Reload);
+            //TempUIManager.DisplayWin(Reload);
         }
         else
             StartPeriod(Period);
@@ -282,7 +282,7 @@ public class LevelManager
         {
             foreach (var obj in p.RelevantObjects)
             {
-                obj.SetActive(true);
+                obj.SetActive(false);
             }
             p.GoalClassroom.SetAsNeutral();
 
