@@ -10,12 +10,11 @@ public class StraightGuy : MonoBehaviour
     public float maxLifetime = 20f;
 
     private Vector3 spawnPoint;
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
     private float timer = 0f;
 
     public void Start()
     {
-        moveDirection = transform.forward;
         spawnPoint = transform.position;
 
         if (moveDirection != Vector3.zero)

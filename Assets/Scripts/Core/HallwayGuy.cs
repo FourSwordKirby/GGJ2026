@@ -5,8 +5,8 @@ using UnityEngine.UIElements.Experimental;
 
 public class HallwayGuy : MonoBehaviour
 {
-    public Vector3 pointA;
-    public Vector3 pointB;
+    public Transform pointA;
+    public Transform pointB;
     public float moveDuration = 3.0f; 
     public float waitTime = 1.0f; 
 
@@ -19,10 +19,10 @@ public class HallwayGuy : MonoBehaviour
     {
         while (true)
         {
-            yield return StartCoroutine(MoveToTarget(pointA, pointB, moveDuration));
+            yield return StartCoroutine(MoveToTarget(pointA.position, pointB.position, moveDuration));
             yield return new WaitForSeconds(waitTime); 
 
-            yield return StartCoroutine(MoveToTarget(pointB, pointA, moveDuration));
+            yield return StartCoroutine(MoveToTarget(pointB.position, pointA.position, moveDuration));
             yield return new WaitForSeconds(waitTime); 
         }
     }

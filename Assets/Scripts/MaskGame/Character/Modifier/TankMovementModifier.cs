@@ -10,6 +10,7 @@ namespace MaskGame.Character.Modifier
 
         public override void ApplyInputToCharacter(MaskGameCharacter character, CharacterInputs inputs, float deltaTime)
         {
+            character.ExtendedRigidbody.SetAngularVelocity(Vector3.zero);
             Vector3 facing = character.GetFacingDirection();
             float horizontal = inputs.MovementIntention.x;
             if (Mathf.Abs(horizontal) > 0.1)
