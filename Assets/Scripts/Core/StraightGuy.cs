@@ -1,4 +1,5 @@
 using MaskGame.Character;
+using System.Net;
 using UnityEngine;
 
 public class StraightGuy : MonoBehaviour
@@ -25,12 +26,19 @@ public class StraightGuy : MonoBehaviour
 
     void Update()
     {
+        var startPoint = transform.position;
         transform.position += moveDirection * speed * Time.deltaTime;
+        var endPoint = transform.position;
         timer += Time.deltaTime;
 
         if (Vector3.Distance(spawnPoint, transform.position) >= maxDistance || timer >= maxLifetime)
         {
             Destroy(gameObject);
+        }
+        var direction = (endPoint - startPoint).normalized;
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(direction.normalized);
         }
     }
 
