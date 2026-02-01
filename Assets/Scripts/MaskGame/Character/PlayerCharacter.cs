@@ -9,8 +9,8 @@ namespace MaskGame.Character
     [RequireComponent(typeof(PlayerMaskManager))]
     public class PlayerCharacter : MaskGameCharacter
     {
-        public PlayerMaskManager MaskManager { get; private set; }
-        public Animator Animator { get; private set; }
+        public PlayerMaskManager MaskManager;
+        public Animator Animator;
 
         protected CharacterInputs InputsForNextFixedUpdate;
 
@@ -24,11 +24,15 @@ namespace MaskGame.Character
             Animator = GetComponentInChildren<Animator>();
         }
 
+        private void Awake()
+        {
+            MaskManager = GetComponent<PlayerMaskManager>();
+            Animator = GetComponentInChildren<Animator>();
+        }
+
         protected override void Start()
         {
             base.Start();
-            MaskManager = GetComponent<PlayerMaskManager>();
-            Animator = GetComponentInChildren<Animator>();
         }
 
         // Update is called once per frame
