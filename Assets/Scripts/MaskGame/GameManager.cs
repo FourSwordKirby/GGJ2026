@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
         PeriodStart,
         PeriodInProgress,
         PeriodEnd,
-        GameOver
+        GameOver,
+        GameComplete
     }
 
     public GamePhase currentPhase;
@@ -78,12 +79,32 @@ public class GameManager : MonoBehaviour
     public Action OnTimeLimitReached;
     public Action<Classroom> OnClassroomReached;
 
+    public Action OnGameComplete;
+
     // singleton design pattern
     public static GameManager instance;
 
     private void OnValidate()
     {
         CheerleaderManager = GetComponentInChildren<CheerleaderManager>();
+    }
+
+    void OnEnable()
+    {
+        TitleUI.OnComplete += OnTitleComplete;
+    }
+
+    void OnDisable()
+    {
+        TitleUI.OnComplete -= OnTitleComplete;
+    }
+
+    void OnTitleComplete()
+    {
+        if (currentPhase == GamePhase.GameStart)
+        {
+            OnStartPeriod(Period);
+        }
     }
 
     private void Start()
@@ -109,7 +130,8 @@ public class GameManager : MonoBehaviour
         Period = 0;
 #endif
 
-        OnStartPeriod(Period);
+        PromptUI.Hide();
+        InitPeriod(Period);
     }
 
     private void OnDestroy()
@@ -121,10 +143,20 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // Pause input
+
+
+
         // Update GamePhase
 
         switch (currentPhase)
         {
+            case GamePhase.GameStart:
+                {
+                    // Progresses via OnTitleComplete
+                }
+                break;
+
             case GamePhase.PeriodStart:
                 {
                     if (ScreenTransitionManager.instance.IsFading())
@@ -181,6 +213,7 @@ public class GameManager : MonoBehaviour
 
         // Enter new state
 
+        GamePhase prevPhase = currentPhase;
         currentPhase = nextPhase;
         currentPhaseSetTime = Time.time;
 
@@ -190,7 +223,13 @@ public class GameManager : MonoBehaviour
                 {
                     TimeRemaining = MaximumTime;
                     Popularity = MaximumPopularity;
-                    ScreenTransitionManager.instance.FadeIn(2.0f);
+
+                    // Don't transition if starting up the game
+
+                    if (prevPhase != GamePhase.GameStart)
+                    {
+                        ScreenTransitionManager.instance.FadeIn(2.0f);
+                    }
                 }
                 break;
 
@@ -299,7 +338,11 @@ public class GameManager : MonoBehaviour
         string periodName = FormatPeriod(period + 1);
         PromptUI.ShowPrompt($"Get to {periodName} Period!");
         SetGamePhase(GamePhase.PeriodStart);
+        InitPeriod(period);
+    }
 
+    void InitPeriod(int period)
+    {
         LevelManager.StartPeriod(period);
 
         // Reset player state

@@ -35,8 +35,14 @@ public class PromptUI : MonoBehaviour
         ShowAlert = false;
     }
 
+    public static void Hide()
+    {
+        instance.gameObject.SetActive(false);
+    }
+
     public static void ShowPrompt(string text)
     {
+        instance.gameObject.SetActive(true);
         instance.promptText.text = text;
         instance.promptAnimator.SetTrigger("Show");
     }
