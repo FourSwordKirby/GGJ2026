@@ -1214,23 +1214,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9586651
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.28453714
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 33.062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1406261137220339590, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1244,8 +1244,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICamera
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7818181255145619577, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
+    - target: {fileID: 6327067976556492264, guid: a1de78fb20e0dea47996bcd0837bf21f, type: 3}
+      propertyPath: orthographic size
+      value: 0.9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
