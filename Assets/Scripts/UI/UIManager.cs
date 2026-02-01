@@ -1,27 +1,28 @@
+using MaskGame.Character;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject indicator;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    // singleton design pattern
+    public static UIManager instance;
+
+    public void Start()
     {
-        
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void ShowMaskChangButtonPrompt(MaskState TargetMaskState)
     {
-        
+        instance.indicator.SetActive(true);
     }
 
-    public void ShowButtonPrompt()
+    public static void HideMaskChangButtonPrompt()
     {
-        indicator.SetActive(true);
-    }
-
-    public void HideButtonPrompt()
-    {
-        indicator.SetActive(false);
+        instance.indicator.SetActive(false);
     }
 }

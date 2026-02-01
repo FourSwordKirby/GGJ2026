@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     public static Action OnTimeLimitReached;
     public static Action<Classroom> OnClassroomReached;
 
+    // singleton design pattern
+    public static GameManager instance;
+
     private void OnValidate()
     {
         CheerleaderManager = GetComponentInChildren<CheerleaderManager>();
@@ -63,6 +66,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+
         InputSystem.actions.FindAction("Move").ReadValue<Vector2>();
         Keyboard.current.spaceKey.IsPressed();
         OnStartPeriod += StartPeriod;

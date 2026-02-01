@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class TimerUI : MonoBehaviour
 {
-    public GameObject timerText;
+    public TextMeshPro timerText;
     private GameManager gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,7 +28,6 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var tmp = timerText.GetComponent<TextMeshProUGUI>();
-        tmp.text = ((int)gameManager.TimeRemaining).ToString();
+        timerText.text = ((int)GameManager.instance.TimeRemaining).ToString();
     }
 }
