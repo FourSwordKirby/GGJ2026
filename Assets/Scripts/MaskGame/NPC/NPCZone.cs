@@ -23,6 +23,11 @@ public class NPCZone : MonoBehaviour
         SpawnCrowd();
     }
 
+    void Update()
+    {
+        spawnGroup.gameObject.SetActive(FIsZoneInFrustum());
+    }
+
     void SpawnCrowd()
     {
         switch (maskClique)
@@ -152,5 +157,17 @@ public class NPCZone : MonoBehaviour
             deck.RemoveAt(randomIndex);
         }
         return result;
+    }
+
+    bool FIsZoneInFrustum()
+    {
+        Camera cam = Camera.main;
+
+        Bounds bounds = new Bounds(transform.position, new Vector3(rectBounds.x, 2.0f, rectBounds.y));
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
+        bool visible = GeometryUtility.TestPlanesAABB(planes, bounds);
+
+        return visible;
     }
 }

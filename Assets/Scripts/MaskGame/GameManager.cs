@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
     void StartPeriod(int period)
     {
         ScreenTransitionManager.instance.FadeIn(2.0f);
-        string periodName = FormatPeriod(period);
+        string periodName = FormatPeriod(period + 1);
         PromptUI.ShowPrompt($"Get to {periodName} Period!");
         currentPhase = GamePhase.PeriodStart;
 
