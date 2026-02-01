@@ -4045,6 +4045,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6592519130291637752, guid: f7beae68ea26de74b8a125a5bb39c751, type: 3}
   m_PrefabInstance: {fileID: 699503893}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &699503895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8513141163498377675, guid: f7beae68ea26de74b8a125a5bb39c751, type: 3}
+  m_PrefabInstance: {fileID: 699503893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf02a42bd3f97b4e9e488588f5b64d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Classroom
 --- !u!1 &708781296
 GameObject:
   m_ObjectHideFlags: 0
@@ -8547,9 +8558,37 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: LevelManager.Periods.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: 'LevelManager.Classrooms.Array.data[0]'
       value: 
       objectReference: {fileID: 940532684}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: LevelManager.Periods.Array.data[0].GoalClassroom
+      value: 
+      objectReference: {fileID: 699503895}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: LevelManager.Periods.Array.data[1].GoalClassroom
+      value: 
+      objectReference: {fileID: 940532684}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: LevelManager.Periods.Array.data[0].RelevantObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: LevelManager.Periods.Array.data[1].RelevantObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: 'LevelManager.Periods.Array.data[0].RelevantObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 167427516}
+    - target: {fileID: 688779522849761114, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
+      propertyPath: 'LevelManager.Periods.Array.data[1].RelevantObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 835106925}
     - target: {fileID: 4687861161432411321, guid: 4786c68967f749947a55f8b932c607ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.45032
