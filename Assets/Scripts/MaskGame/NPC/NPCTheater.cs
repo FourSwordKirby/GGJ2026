@@ -1,5 +1,6 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
+using MaskGame.Character;
 
 public class NPCTheater : NPCCharacter
 {
@@ -7,7 +8,7 @@ public class NPCTheater : NPCCharacter
 
     protected override void InitChar()
     {
-        cliqueKind = CliqueKind.THEATER;
+        maskClique = MaskState.THEATER;
     }
 
     protected override void InitTransform()

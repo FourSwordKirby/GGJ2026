@@ -1,11 +1,13 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using MaskGame.Character;
 
 public class NPCZone : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private CliqueKind cliqueKind;
+    [SerializeField] private MaskState maskClique;
+    [SerializeField] private bool renderGizmo = false;
 
     [Header("References")]
     [SerializeField] private NPCSettings npcSettings;
@@ -23,34 +25,34 @@ public class NPCZone : MonoBehaviour
 
     void SpawnCrowd()
     {
-        switch (cliqueKind)
+        switch (maskClique)
         {
-            case CliqueKind.JOCK:
+            case MaskState.JOCK:
                 {
                     SpawnNPCGrid(unitSize: 4, offsetLimit: 1);
                 }
                 break;
 
-            case CliqueKind.CHEERLEADER:
+            case MaskState.CHEER:
                 {
                     SpawnNPCGrid(unitSize: 5);
 
                 }
                 break;
 
-            case CliqueKind.BUSINESS:
+            case MaskState.BUSINESS:
                 {
                     SpawnNPCGrid(unitSize: 4, populationRatio: 0.6f);
                 }
                 break;
 
-            case CliqueKind.NERD:
+            case MaskState.NERD:
                 {
                     SpawnNPCGrid(unitSize: 4, populationRatio: 0.3f);
                 }
                 break;
 
-            case CliqueKind.THEATER:
+            case MaskState.THEATER:
                 {
                     float marginHori = npcSettings.theaterMoveSpeed * npcSettings.theaterSwitchTime * 1.05f;
                     SpawnNPCGrid(unitSize: 3, offsetLimit: 0.5f, marginHori: marginHori, marginVert: 3);
@@ -99,7 +101,7 @@ public class NPCZone : MonoBehaviour
 
             Vector3 spawnPos = spawnMin + new Vector3(dPosSpawn.x, 0, dPosSpawn.y);
 
-            GameObject npcObj = Instantiate(referenceLibrary.PrefabForClique(cliqueKind), spawnPos, Quaternion.identity, spawnGroup);
+            GameObject npcObj = Instantiate(referenceLibrary.PrefabForClique(maskClique), spawnPos, Quaternion.identity, spawnGroup);
             NPCCharacter npcChar = npcObj.GetComponent<NPCCharacter>();
             npcChar.Init(this);
         }
@@ -123,6 +125,9 @@ public class NPCZone : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (!renderGizmo)
+            return;
+
         Gizmos.color = new Color(0, 0, 1, 0.5f);
         Gizmos.DrawCube(transform.position, transform.localScale);
     }

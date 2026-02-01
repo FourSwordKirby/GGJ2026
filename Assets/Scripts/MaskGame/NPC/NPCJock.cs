@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
+using MaskGame.Character;
 
 public class NPCJock : NPCCharacter
 {
@@ -10,7 +11,7 @@ public class NPCJock : NPCCharacter
 
     protected override void InitChar()
     {
-        cliqueKind = CliqueKind.JOCK;
+        maskClique = MaskState.JOCK;
     }
 
     protected override void InitTransform()
@@ -30,8 +31,6 @@ public class NPCJock : NPCCharacter
         // Ignore velocity, use angular math instead
 
         float angularSpeed = -npcSettings.jockRunVelocity * Mathf.Rad2Deg / npcSettings.jockRunRadius;
-        Vector3 normalCur = Vector3.Normalize(Vector3.Cross(velocity, Vector3.up));
-
         transform.RotateAround(posPivot, Vector3.up, angularSpeed * Time.deltaTime);
     }
 }

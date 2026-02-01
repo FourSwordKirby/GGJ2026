@@ -1,5 +1,6 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
+using MaskGame.Character;
 
 public class NPCNerd : NPCCharacter
 {
@@ -20,7 +21,7 @@ public class NPCNerd : NPCCharacter
 
     protected override void InitChar()
     {
-        cliqueKind = CliqueKind.NERD;
+        maskClique = MaskState.NERD;
     }
 
     protected override void InitTransform()

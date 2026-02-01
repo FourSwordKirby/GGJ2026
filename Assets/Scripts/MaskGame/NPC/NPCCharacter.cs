@@ -1,14 +1,6 @@
 using UnityEngine;
+using MaskGame.Character;
 using Random = UnityEngine.Random;
-
-public enum CliqueKind
-{
-    JOCK,
-    CHEERLEADER,
-    BUSINESS,
-    NERD,
-    THEATER
-}
 
 public abstract class NPCCharacter : MonoBehaviour
 {
@@ -16,7 +8,7 @@ public abstract class NPCCharacter : MonoBehaviour
     [SerializeField] protected NPCSettings npcSettings;
 
     [Header("Debug Only")]
-    [SerializeField] protected CliqueKind cliqueKind;
+    [SerializeField] protected MaskState maskClique;
     [SerializeField] protected NPCZone owningZone;
 
     protected float spawnTime;

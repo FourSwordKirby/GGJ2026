@@ -2,6 +2,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
+using MaskGame.Character;
 
 public class NPCBusiness : NPCCharacter
 {
@@ -25,7 +26,7 @@ public class NPCBusiness : NPCCharacter
 
     protected override void InitChar()
     {
-        cliqueKind = CliqueKind.BUSINESS;
+        maskClique = MaskState.BUSINESS;
     }
 
     protected override void InitTransform()

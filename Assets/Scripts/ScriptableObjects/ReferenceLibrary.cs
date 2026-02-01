@@ -1,4 +1,5 @@
 using UnityEngine;
+using MaskGame.Character;
 
 [CreateAssetMenu(fileName = "ReferenceLibrary", menuName = "ScriptableObjects/ReferenceLibrary")]
 public class ReferenceLibrary : ScriptableObject
@@ -9,15 +10,15 @@ public class ReferenceLibrary : ScriptableObject
     public GameObject npcNerdPrefab;
     public GameObject npcTheaterPrefab;
 
-    public GameObject PrefabForClique(CliqueKind cliqueKind)
+    public GameObject PrefabForClique(MaskState maskClique)
     {
-        switch (cliqueKind)
+        switch (maskClique)
         {
-            case CliqueKind.JOCK: return npcJockPrefab;
-            case CliqueKind.CHEERLEADER: return npcCheerPrefab;
-            case CliqueKind.BUSINESS: return npcBusinessPrefab;
-            case CliqueKind.NERD: return npcNerdPrefab;
-            case CliqueKind.THEATER: return npcTheaterPrefab;
+            case MaskState.JOCK: return npcJockPrefab;
+            case MaskState.CHEER: return npcCheerPrefab;
+            case MaskState.BUSINESS: return npcBusinessPrefab;
+            case MaskState.NERD: return npcNerdPrefab;
+            case MaskState.THEATER: return npcTheaterPrefab;
             default: return null;
         }
     }

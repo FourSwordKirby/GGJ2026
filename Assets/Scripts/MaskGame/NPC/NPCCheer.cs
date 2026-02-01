@@ -1,5 +1,6 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
+using MaskGame.Character;
 
 public class NPCCheer : NPCCharacter
 {
@@ -7,7 +8,7 @@ public class NPCCheer : NPCCharacter
 
     protected override void InitChar()
     {
-        cliqueKind = CliqueKind.CHEERLEADER;
+        maskClique = MaskState.CHEER;
     }
 
     protected override void InitTransform()
