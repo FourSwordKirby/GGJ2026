@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
         OnClassroomReached += PassPeriod;
 
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
-        AudioManager.instance.StartLevelMusic();
 
 #if UNITY_EDITOR
         Period = 0;
@@ -300,6 +299,10 @@ public class GameManager : MonoBehaviour
         // While the player's mask is mismatched, tick the timer up.
         if (player.IsInMismatchedZone())
         {
+            // Play sfx when losing popularity for the first time;
+            if (MismatchedMaskStateDuration == 0)
+                AudioManager.instance.PlayLosingPopularity();
+
             MismatchedMaskStateDuration += Time.deltaTime;
             PromptUI.instance.ShowAlert = true;
         }
@@ -347,6 +350,7 @@ public class GameManager : MonoBehaviour
     void InitPeriod(int period)
     {
         LevelManager.StartPeriod(period);
+        AudioManager.instance.StartLevelMusic(period);
 
         // Reset player state
 

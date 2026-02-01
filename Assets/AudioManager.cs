@@ -4,7 +4,9 @@ using MaskGame.Character;
 public class AudioManager : MonoBehaviour
 {
     public AudioClip loopingMenuBGM;
-    public AudioClip loopingLevelBGM;
+    public AudioClip periodBGM1;
+    public AudioClip periodBGM2;
+    public AudioClip successBGM;
 
     public AudioClip SwitchMaskClip;
     public AudioClip JockZoneClip;
@@ -13,6 +15,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip CheerZoneClip;
     public AudioClip TheaterZoneClip;
 
+    public AudioClip LosingPopularity;
+    public AudioClip OnHit;
     public AudioClip PeriodPassed;
     public AudioClip OutOfTime;
     public AudioClip Last10Seconds;
@@ -29,9 +33,21 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-    public void StartLevelMusic()
+    public void StartLevelMusic(int period)
     {
-        rootAudioSource.generator = loopingLevelBGM;
+        if(period == 0)
+        {
+            rootAudioSource.generator = periodBGM1;
+        }
+        if (period == 1)
+        {
+            rootAudioSource.generator = periodBGM2;
+        }
+        if (period == 2)
+        {
+            rootAudioSource.generator = successBGM;
+        }
+
         rootAudioSource.Play();
     }
 
@@ -64,6 +80,16 @@ public class AudioManager : MonoBehaviour
                 rootAudioSource.PlayOneShot(TheaterZoneClip);
                 break;
         }
+    }
+
+    public void PlayLosingPopularity()
+    {
+        rootAudioSource.PlayOneShot(LosingPopularity);
+    }
+
+    public void PlayOnHit()
+    {
+        rootAudioSource.PlayOneShot(OnHit);
     }
 
     public void PlayLast10Seconds()
