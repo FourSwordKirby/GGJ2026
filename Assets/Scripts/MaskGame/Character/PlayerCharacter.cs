@@ -50,8 +50,7 @@ namespace MaskGame.Character
             MaskManager.Step(deltaTime);
             MaskManager.GetCurrentMovementMondifier().ApplyInputToCharacter(this, InputsForNextFixedUpdate, deltaTime);
 
-            InputsForNextFixedUpdate = new CharacterInputs();
-
+            InputsForNextFixedUpdate.TriggerToggle = false;
             ExtendedRigidbody.ApplyGravityImpulse(deltaTime);
         }
 
