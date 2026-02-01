@@ -124,7 +124,6 @@ public class GameManager : MonoBehaviour
         OnClassroomReached += PassPeriod;
 
         player = FindObjectsByType<PlayerCharacter>(FindObjectsSortMode.InstanceID)[0];
-        AudioManager.instance.StartLevelMusic();
 
 #if UNITY_EDITOR
         Period = 0;
@@ -348,6 +347,7 @@ public class GameManager : MonoBehaviour
     void InitPeriod(int period)
     {
         LevelManager.StartPeriod(period);
+        AudioManager.instance.StartLevelMusic(period);
 
         // Reset player state
 

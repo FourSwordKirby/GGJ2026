@@ -33,9 +33,21 @@ public class AudioManager : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-    public void StartLevelMusic()
+    public void StartLevelMusic(int period)
     {
-        rootAudioSource.generator = periodBGM1;
+        if(period == 0)
+        {
+            rootAudioSource.generator = periodBGM1;
+        }
+        if (period == 1)
+        {
+            rootAudioSource.generator = periodBGM2;
+        }
+        if (period == 2)
+        {
+            rootAudioSource.generator = successBGM;
+        }
+
         rootAudioSource.Play();
     }
 
