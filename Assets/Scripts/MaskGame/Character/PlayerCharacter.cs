@@ -63,8 +63,8 @@ namespace MaskGame.Character
             }
             else
             {
-                // if we're assining the current zone for the first time, we just entered this zone and need to play a sfx
-                if (CurrentZone == null)
+                // if we're re-assigning the current zone, we're entering a new zone and need to play the appropraite sound effect
+                if (CurrentZone != OverlappedZones[0])
                     AudioManager.instance.PlayZoneEnter(OverlappedZones[0].ZoneMaskState);
 
                 CurrentZone = OverlappedZones[0];
