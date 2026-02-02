@@ -24,8 +24,9 @@ namespace MaskGame.Character
             Animator = GetComponentInChildren<Animator>();
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             MaskManager = GetComponent<PlayerMaskManager>();
             Animator = GetComponentInChildren<Animator>();
         }
@@ -33,6 +34,7 @@ namespace MaskGame.Character
         protected override void Start()
         {
             base.Start();
+            Animator = GetComponentInChildren<Animator>();
         }
 
         // Update is called once per frame

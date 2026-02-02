@@ -32,6 +32,12 @@ namespace MaskGame.Character
             RefreshTint();
         }
 
+        private void Awake()
+        {
+            Player = GetComponent<PlayerCharacter>();
+            RefreshTint();
+        }
+
         public void QueueNextMaskState(MaskState nextMaskState)
         {
             NextMaskState = nextMaskState;
