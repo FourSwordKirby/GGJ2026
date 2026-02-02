@@ -43,10 +43,13 @@ public class AudioManager : MonoBehaviour
         {
             rootAudioSource.generator = periodBGM2;
         }
-        if (period == 2)
-        {
-            rootAudioSource.generator = successBGM;
-        }
+
+        rootAudioSource.Play();
+    }
+
+    public void PlayEndingMusic()
+    {
+        rootAudioSource.generator = successBGM;
 
         rootAudioSource.Play();
     }

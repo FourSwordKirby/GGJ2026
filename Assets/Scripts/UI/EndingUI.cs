@@ -30,6 +30,8 @@ public class EndingUI : MonoBehaviour
 
 	IEnumerator EndingSequence()
 	{
+		AudioManager.instance.PlayEndingMusic();
+
 		// Slide one
 
 		gameObject.SetActive(true);
