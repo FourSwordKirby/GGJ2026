@@ -24,6 +24,12 @@ public class TitleUI : MonoBehaviour
 	void OnEnable()
 	{
 		Reset();
+		GameManager.OnGameRestart += Reset;
+	}
+
+	void OnDisable()
+	{
+		GameManager.OnGameRestart -= Reset;
 	}
 
 	IEnumerator TitleSequence()
@@ -41,6 +47,5 @@ public class TitleUI : MonoBehaviour
 		OnComplete?.Invoke();
 
 		yield return new WaitForSeconds(1.0f);
-		gameObject.SetActive(false);
 	}
 }
