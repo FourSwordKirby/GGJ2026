@@ -9,8 +9,8 @@ namespace MaskGame.Character
     [RequireComponent(typeof(PlayerMaskManager))]
     public class PlayerCharacter : MaskGameCharacter
     {
-        public PlayerMaskManager MaskManager { get; private set; }
-        public Animator Animator { get; private set; }
+        public PlayerMaskManager MaskManager;
+        public Animator Animator;
 
         protected CharacterInputs InputsForNextFixedUpdate;
 
@@ -20,6 +20,12 @@ namespace MaskGame.Character
         protected override void OnValidate()
         {
             base.OnValidate();
+            MaskManager = GetComponent<PlayerMaskManager>();
+            Animator = GetComponentInChildren<Animator>();
+        }
+
+        private void Awake()
+        {
             MaskManager = GetComponent<PlayerMaskManager>();
             Animator = GetComponentInChildren<Animator>();
         }

@@ -4,7 +4,17 @@ using Random = UnityEngine.Random;
 
 public abstract class NPCCharacter : MonoBehaviour
 {
-    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+    protected NPCSettings npcSettings
+    {
+        get
+        {
+            if (GameManager.instance == null)
+            {
+                return FindAnyObjectByType<GameManager>()?.NPCSettings;
+            }
+            return GameManager.instance?.NPCSettings;
+        }
+    }
 
     protected Animator animator;
 

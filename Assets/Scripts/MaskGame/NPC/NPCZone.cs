@@ -13,7 +13,17 @@ public class NPCZone : MonoBehaviour
     [Header("References")]
     [SerializeField] private ReferenceLibrary referenceLibrary;
 
-    protected NPCSettings npcSettings => GameManager.instance?.NPCSettings;
+    protected NPCSettings npcSettings
+    {
+        get
+        {
+            if (GameManager.instance == null)
+            {
+                return FindAnyObjectByType<GameManager>()?.NPCSettings;
+            }
+            return GameManager.instance?.NPCSettings;
+        }
+    }
 
     private Rect rectBounds;
     private Transform spawnGroup;

@@ -46,17 +46,17 @@ public class StraightGuy : MonoBehaviour
         }
     }
 
-	private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("EndBox"))
-        {
-            Destroy(gameObject);
-        }
+	//private void OnTriggerEnter(Collider other)
+ //   {
+ //       if (other.CompareTag("EndBox"))
+ //       {
+ //           Destroy(gameObject);
+ //       }
 
-        if (other.TryGetComponent<PlayerCharacter>(out var player))
-        {
-            Vector3 impulseDir = (other.transform.position - transform.position).normalized;
-            player.ExtendedRigidbody.ApplyImpulse(impulseDir * knockbackStrength, false);
-        }
-    }
+ //       if (other.TryGetComponent<PlayerCharacter>(out var player))
+ //       {
+ //           Vector3 impulseDir = (other.transform.position - transform.position).normalized;
+ //           player.ExtendedRigidbody.ApplyImpulse(impulseDir * knockbackStrength, false);
+ //       }
+ //   }
 }
