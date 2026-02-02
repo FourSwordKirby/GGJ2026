@@ -79,7 +79,8 @@ public class GameManager : MonoBehaviour
     public Action OnTimeLimitReached;
     public Action<Classroom> OnClassroomReached;
 
-    public Action OnGameComplete;
+    public static event Action OnGameRestart;
+    public static event Action OnGameComplete;
 
     // singleton design pattern
     public static GameManager instance;
@@ -92,11 +93,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         TitleUI.OnComplete += OnTitleComplete;
+        EndingUI.OnComplete += OnEndingComplete;
     }
 
     void OnDisable()
     {
         TitleUI.OnComplete -= OnTitleComplete;
+        EndingUI.OnComplete -= OnEndingComplete;
     }
 
     void OnTitleComplete()
@@ -104,6 +107,20 @@ public class GameManager : MonoBehaviour
         if (currentPhase == GamePhase.GameStart)
         {
             OnStartPeriod(Period);
+        }
+    }
+
+    void OnEndingComplete()
+    {
+        Debug.Log("Ending Compete!");
+        if (currentPhase == GamePhase.GameComplete)
+        {
+            Debug.Log("Game Restart!");
+            Period = 0; 
+            InitPeriod(Period);
+
+            PromptUI.Hide();
+            OnGameRestart?.Invoke();
         }
     }
 
@@ -143,10 +160,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Pause input
-
-
-
         // Update GamePhase
 
         switch (currentPhase)
@@ -244,6 +257,13 @@ public class GameManager : MonoBehaviour
                     ScreenTransitionManager.instance.FadeOut(2.0f);
                 }
                 break;
+
+            case GamePhase.GameComplete:
+                {
+                    ScreenTransitionManager.instance.FadeIn(1.0f);
+                    OnGameComplete?.Invoke();
+                }
+                break;
         }
     }
 
@@ -327,7 +347,7 @@ public class GameManager : MonoBehaviour
         if (Period >= MaxPeriod)
         {
             Debug.Log("Max Period Reached");
-            //TempUIManager.DisplayWin(Reload);
+            SetGamePhase(GamePhase.GameComplete);
         }
         else
             StartPeriod(Period);
